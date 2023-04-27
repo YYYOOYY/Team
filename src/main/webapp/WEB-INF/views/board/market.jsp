@@ -27,7 +27,7 @@ padding: 1px;
 				<button id="logon">물건등록</button>
 					<script>
 						document.querySelector("#logon").onclick = function(evt) {
-							var returnValue = confirm('로그인이 필요합니다');
+							var returnValue = confirm('로그인이 필요합니다.');
 							if(returnValue) {
 								location.href='/login'
 							}
