@@ -21,8 +21,16 @@ public class Board {
 	int price;
 	// 거래상태확인
 	int status;
+	// 물품사진
+	String img;
 	
 	
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
 	public String getCode() {
 		return code;
 	}
