@@ -15,7 +15,7 @@
 		<%-- 키워드검색끝 --%>
 		<%-- 지역별검색시작 --%>
 		<div>
-		<%-- 팔도검색 시작 --%>
+		<%-- 팔도검색시작 --%>
 		<select id="area" name="area">
 			<option value="">전체/도</option>
 			<c:forEach items="${cityList }" var="c">
@@ -25,7 +25,7 @@
 		<select name="city" class="city" data-group>
 			<option value="">전체/시/군</option>
 		</select>
-		<%-- 팔도검색 끝 --%>
+		<%-- 팔도검색끝 --%>
 		<%-- 시/도 시작 --%>
 		<select name="city" style="display: none;" data-group="서울시" class="city">
 			<c:forTokens items="강남구,강동구,강북구,강서구,관악구,광진구,구로구,금천구,노원구,도봉구,동대문구,동작구,마포구,서대문구,서초구,성동구,성북구,송파구,양천구,영등포구,용산구,은평구,종로구,중구,중랑구" delims="," var="city">
