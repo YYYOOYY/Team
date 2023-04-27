@@ -1,4 +1,4 @@
-package controller.user;
+package user.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
