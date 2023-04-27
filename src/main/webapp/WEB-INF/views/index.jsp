@@ -1,12 +1,143 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>ìº í•‘ì–´ë•Œ ì›°ì»´í˜ì´ì§€</title>
+<meta charset="EUC-KR">
+<title>À£ÄÄÆäÀÌÁö</title>
 </head>
 <body>
-	<a href="/login">ë¡œê·¸ì¸</a> 
+<%@ include file="/common/top.jsp" %>
+	<form action="search">
+		<%-- Å°¿öµå°Ë»ö½ÃÀÛ --%>
+		<input type="text" name="keyword">
+		<%-- Å°¿öµå°Ë»ö³¡ --%>
+		<%-- Áö¿ªº°°Ë»ö½ÃÀÛ --%>
+		<div>
+		<%-- ÆÈµµ ½ÃÀÛ --%>
+		<select id="area" name="area">
+			<option value="">ÀüÃ¼/µµ</option>
+			<c:forEach items="${cityList }" var="c">
+				<option value="${c }">${c }</option>
+			</c:forEach>
+		</select>
+		<select name="city" class="city" data-group>
+			<option value="">ÀüÃ¼/½Ã/±º</option>
+		</select>
+		<%-- ÆÈµµ ³¡ --%>
+		<%-- ½Ã/µµ ½ÃÀÛ --%>
+		<select name="city" style="display: none;" data-group="¼­¿ï½Ã" class="city">
+			<c:forTokens items="°­³²±¸,°­µ¿±¸,°­ºÏ±¸,°­¼­±¸,°ü¾Ç±¸,±¤Áø±¸,±¸·Î±¸,±İÃµ±¸,³ë¿ø±¸,µµºÀ±¸,µ¿´ë¹®±¸,µ¿ÀÛ±¸,¸¶Æ÷±¸,¼­´ë¹®±¸,¼­ÃÊ±¸,¼ºµ¿±¸,¼ººÏ±¸,¼ÛÆÄ±¸,¾çÃµ±¸,¿µµîÆ÷±¸,¿ë»ê±¸,ÀºÆò±¸,Á¾·Î±¸,Áß±¸,Áß¶û±¸" delims="," var="city">
+				<option value="${city }">${city }</option>
+			</c:forTokens>
+		</select>
+		<select name="city" style="display: none;" data-group="ºÎ»ê½Ã" class="city">
+			<c:forTokens items="°­¼­±¸,±İÁ¤±¸,±âÀå±º,³²±¸,µ¿±¸,µ¿·¡±¸,ºÎ»êÁø±¸,ºÏ±¸,»ç»ó±¸,»çÇÏ±¸,¼­±¸,¼ö¿µ±¸,¿¬Á¦±¸,¿µµµ±¸,Áß±¸,ÇØ¿î´ë±¸" delims="," var="city">
+				<option value="${city }">${city }</option>
+			</c:forTokens>
+		</select>
+		<select name="city" style="display: none;" data-group="´ë±¸½Ã" class="city">
+			<c:forTokens items="³²±¸,´Ş¼­±¸,´Ş¼º±º,µ¿±¸,ºÏ±¸,»óÁÖ,¼­±¸,¼ö¼º±¸,Áß±¸" delims="," var="city">
+				<option value="${city }">${city }</option>
+			</c:forTokens>
+		</select>
+		<select name="city" style="display: none;" data-group="ÀÎÃµ½Ã" class="city">
+			<c:forTokens items="°­È­±º,°è¾ç±¸,³²±¸,³²µ¿±¸,µ¿±¸,ºÎÆò±¸,¼­±¸,¿¬¼ö±¸,¿ËÁø±º,Áß±¸" delims="," var="city">
+				<option value="${city }">${city }</option>
+			</c:forTokens>
+		</select>
+		<select name="city" style="display: none;" data-group="±¤ÁÖ½Ã" class="city">
+			<c:forTokens items="±¤»ê±¸,³²±¸,µ¿±¸,ºÏ±¸,¼­±¸" delims="," var="city">
+				<option value="${city }">${city }</option>
+			</c:forTokens>
+		</select>
+		<select name="city" style="display: none;" data-group="´ëÀü½Ã" class="city">
+			<c:forTokens items="´ë´ö±¸,µ¿±¸,¼­±¸,À¯¼º±¸,Áß±¸" delims="," var="city">
+				<option value="${city }">${city }</option>
+			</c:forTokens>
+		</select>
+		<select name="city" style="display: none;" data-group="¿ï»ê½Ã" class="city">
+			<c:forTokens items="³²±¸,µ¿±¸,ºÏ±¸,¿ïÁÖ±º,Áß±¸" delims="," var="city">
+				<option value="${city }">${city }</option>
+			</c:forTokens>
+		</select>
+		<select name="city" style="display: none;" data-group="¼¼Á¾½Ã" class="city">
+			<c:forTokens items="±İ³²¸é,¼¼Á¾½Ã,¼ÒÁ¤¸é,¿¬¼­¸é,Àüµ¿¸é" delims="," var="city">
+				<option value="${city }">${city }</option>
+			</c:forTokens>
+		</select>
+		<select name="city" style="display: none;" data-group="°æ±âµµ" class="city">
+			<c:forTokens items="°¡Æò±º,°í¾ç½Ã,°úÃµ½Ã,±¤¸í½Ã,±¤ÁÖ½Ã,±¸¸®½Ã,±ºÆ÷½Ã,±èÆ÷½Ã,³²¾çÁÖ½Ã,µ¿µÎÃµ½Ã,ºÎÃµ½Ã,¼º³²½Ã,¼ö¿ø½Ã,½ÃÈï½Ã,¾È»ê½Ã,¾È¼º½Ã,¾È¾ç½Ã,¾çÁÖ½Ã,¾çÆò±º,¿©ÁÖ½Ã,¿¬Ãµ±º,¿À»ê½Ã,¿ëÀÎ½Ã,ÀÇ¿Õ½Ã,ÀÇÁ¤ºÎ½Ã,ÀÌÃµ½Ã,ÆÄÁÖ½Ã,ÆòÅÃ½Ã,Æ÷Ãµ½Ã,ÇÏ³²½Ã,È­¼º½Ã" delims="," var="city">
+				<option value="${city }">${city }</option>
+			</c:forTokens>
+		</select>
+		<select name="city" style="display: none;" data-group="°­¿øµµ" class="city">
+			<c:forTokens items="°­¸ª½Ã,°í¼º±º,µ¿ÇØ½Ã,»ïÃ´½Ã,¼ÓÃÊ½Ã,¾ç±¸±º,¾ç¾ç±º,¿µ¿ù±º,¿øÁÖ½Ã,ÀÎÁ¦±º,Á¤¼±±º,Ã¶¿ø±º,ÃáÃµ½Ã,ÅÂ¹é½Ã,ÆòÃ¢±º,È«Ãµ±º,È­Ãµ±º,È¾¼º±º" delims="," var="city">
+				<option value="${city }">${city }</option>
+			</c:forTokens>
+		</select>
+		<select name="city" style="display: none;" data-group="ÃæÃ»ºÏµµ" class="city">
+			<c:forTokens items="±«»ê±º,´Ü¾ç±º,º¸Àº±º,¿µµ¿±º,¿ÁÃµ±º,À½¼º±º,Á¦Ãµ½Ã,ÁõÆò±º,ÁøÃµ±º,Ã»¿ø±º,Ã»ÁÖ½Ã,ÃæÁÖ½Ã" delims="," var="city">
+				<option value="${city }">${city }</option>
+			</c:forTokens>
+		</select>
+		<select name="city" style="display: none;" data-group="ÃæÃ»³²µµ" class="city">
+			<c:forTokens items="°è·æ½Ã,°øÁÖ½Ã,±İ»ê±º,³í»ê½Ã,´çÁø½Ã,º¸·É½Ã,ºÎ¿©±º,¼­»ê½Ã,¼­Ãµ±º,¾Æ»ê½Ã,¿¹»ê±º,Ãµ¾È½Ã,Ã»¾ç±º,ÅÂ¾È±º,È«¼º±º" delims="," var="city">
+				<option value="${city }">${city }</option>
+			</c:forTokens>
+		</select>
+		<select name="city" style="display: none;" data-group="Àü¶óºÏµµ" class="city">
+			<c:forTokens items="°íÃ¢±º,±º»ê½Ã,±èÁ¦½Ã,³²¿ø½Ã,¹«ÁÖ±º,ºÎ¾È±º,¼øÃ¢±º,¿ÏÁÖ±º,ÀÍ»ê½Ã,ÀÓ½Ç±º,Àå¼ö±º,ÀüÁÖ½Ã,Á¤À¾½Ã,Áø¾È±º" delims="," var="city">
+				<option value="${city }">${city }</option>
+			</c:forTokens>
+		</select>
+		<select name="city" style="display: none;" data-group="Àü¶ó³²µµ" class="city">
+			<c:forTokens items="°­Áø±º,°íÈï±º,°î¼º±º,±¤¾ç½Ã,±¸·Ê±º,³ªÁÖ½Ã,´ã¾ç±º,¸ñÆ÷½Ã,¹«¾È±º,º¸¼º±º,¼øÃµ½Ã,½Å¾È±º,¿©¼ö½Ã,¿µ±¤±º,¿µ¾Ï±º,¿Ïµµ±º,Àå¼º±º,ÀåÈï±º,Áøµµ±º,ÇÔÆò±º,ÇØ³²±º,È­¼ø±º" delims="," var="city">
+				<option value="${city }">${city }</option>
+			</c:forTokens>
+		</select>
+		<select name="city" style="display: none;" data-group="°æ»óºÏµµ" class="city">
+			<c:forTokens items="°æ»ê½Ã,°æÁÖ½Ã,°í·É±º,±¸¹Ì½Ã,±ºÀ§±º,±èÃµ½Ã,¹®°æ½Ã,ºÀÈ­±º,»óÁÖ½Ã,¼ºÁÖ±º,¾Èµ¿½Ã,¿µ´ö±º,¿µ¾ç±º,¿µÁÖ½Ã,¿µÃµ½Ã,¿¹Ãµ±º,¿ï¸ª±º,¿ïÁø±º,ÀÇ¼º±º,Ã»µµ±º,Ã»¼Û±º,Ä¥°î±º,Æ÷Ç×½Ã" delims="," var="city">
+				<option value="${city }">${city }</option>
+			</c:forTokens>
+		</select>
+		<select name="city" style="display: none;" data-group="°æ»ó³²µµ" class="city">
+			<c:forTokens items="°ÅÁ¦½Ã,°ÅÃ¢±º,°í¼º±º,±èÇØ½Ã,³²ÇØ±º,¹Ğ¾ç½Ã,»çÃµ½Ã,»êÃ»±º,¾ç»ê½Ã,ÀÇ·É±º,ÁøÁÖ½Ã,Ã¢³ç±º,Ã¢¿ø½Ã,Åë¿µ½Ã,ÇÏµ¿±º,ÇÔ¾È±º,ÇÔ¾ç±º,ÇÕÃµ±º" delims="," var="city">
+				<option value="${city }">${city }</option>
+			</c:forTokens>
+		</select>
+		<select name="city" style="display: none;" data-group="Á¦ÁÖµµ" class="city">
+			<c:forTokens items="¼­±ÍÆ÷½Ã,Á¦ÁÖ½Ã" delims="," var="city">
+				<option value="${city }">${city }</option>
+			</c:forTokens>
+		</select>
+		<%-- ½Ã/µµ ³¡ --%>
+		</div>
+		<script>
+			document.querySelector("#area").onchange = function(evt) {
+				document.querySelectorAll(".city").forEach(function(one) {
+					console.log(evt, one)
+					if(one.dataset.group != evt.target.value){
+						one.style.display = "none";
+					}else{
+						one.style.display = "";
+					}
+				})
+			};
+		</script>
+		<%-- Áö¿ªº°°Ë»ö³¡ --%>
+		<%-- Å×¸¶°Ë»ö½ÃÀÛ --%>
+		<div>
+		<select name="thema">
+			<option value="">ÀüÃ¼</option>
+			<c:forEach items="${themaList }" var="t">
+				<option value="${t }">${t }</option>
+			</c:forEach>
+		</select>
+		</div>
+		<%-- Å×¸¶°Ë»ö³¡ --%>
+		<button type="submit">°Ë»ö</button>
+	</form>
 </body>
 </html>
