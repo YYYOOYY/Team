@@ -18,13 +18,13 @@
 		<div>
 		<%-- 팔도검색 시작 --%>
 		<select id="area" name="area">
-			<option value="">전체/도</option>
+			<option value="">전체(도)</option>
 			<c:forEach items="${cityList }" var="c">
 				<option value="${c }">${c }</option>
 			</c:forEach>
 		</select>
 		<select name="city" class="city" data-group>
-			<option value="">전체/시/군</option>
+			<option value="">전체(시/군)</option>
 		</select>
 		<%-- 팔도검색 끝 --%>
 		<%-- 시/도 시작 --%>
