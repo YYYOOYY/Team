@@ -5,14 +5,18 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
+import java.util.Map;
 
 import com.google.gson.Gson;
 
+import data.camping.CampingItem;
 import data.camping.CampingResponse;
 import data.camping.CampingResult;
 
 public class OpenDictAPI {
 
+	private static Map<String, CampingItem> cache;
+	
 	public static CampingResponse search(String q) {
 		try {
 			String targetURL = "http://apis.data.go.kr/B551011/GoCamping";
@@ -29,12 +33,20 @@ public class OpenDictAPI {
 			Gson gson = new Gson();
 			CampingResult campingResult = gson.fromJson(response.body(), CampingResult.class);
 			
+			for(CampingItem one : campingResult.getResponse().getBody().getItems().getItem()) {
+				cache.put(one.getContentId(), one);
+			}
+			
 			return campingResult.getResponse();
 			
 		}catch(Exception e){
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public static CampingItem findByDesertionNo(String no) {
+		return cache.get(no);
 	}
 	
 }
