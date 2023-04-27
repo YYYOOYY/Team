@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -22,6 +23,9 @@ import data.board.Board;
 public class BoardController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		session.setAttribute("cate", 2);
+		
 		SqlSessionFactory factory =
 				(SqlSessionFactory)req.getServletContext().getAttribute("sqlSessionFactory");
 		SqlSession sqlSession = factory.openSession(true);
