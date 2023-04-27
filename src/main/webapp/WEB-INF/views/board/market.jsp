@@ -13,8 +13,9 @@ padding: 1px;
 </style>
 </head>
 <body>
+<%@ include file="/common/top.jsp" %>
 	<h3>캠핑용품을 캠핑어때에서 만나보세요</h3>
-	<div style="text-align: right" >
+	<div style="text-align: right" >	
 		<div id="fail"> </div>
 		<c:choose>
 			<c:when test="${sessionScope.logon }">
@@ -26,8 +27,9 @@ padding: 1px;
 				<button id="logon">물건등록</button>
 					<script>
 						document.querySelector("#logon").onclick = function(evt) {
-						if(${sessionScope.logon } == false){
-							document.querySelector("#fail").innerHTML = '로그인이 필요합니다.'
+							var returnValue = confirm('로그인이 필요합니다.');
+							if(returnValue) {
+								location.href='/login'
 							}
 						}
 					</script>
