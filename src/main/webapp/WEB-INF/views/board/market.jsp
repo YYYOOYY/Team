@@ -13,7 +13,6 @@ padding: 1px;
 </style>
 </head>
 <body>
-<%@ include file="/common/top.jsp" %>
 	<h3>캠핑용품을 캠핑어때에서 만나보세요</h3>
 	<div style="text-align: right" >
 		<form action="/board/create">

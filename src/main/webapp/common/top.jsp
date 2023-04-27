@@ -5,7 +5,7 @@
 <form action="/index" onclick="location.href='/index'">
 	<img src="/resource/img/logo.png" />
 </form>
-<a href="">д╥гнюЕ ╟к╩Ж</a>	<a href="/board/market">д╥гн╦╤до</a> <a href="">д╥гн╪р╫д</a>	
+<a href="">д╥гнюЕ ╟к╩Ж</a>	<a href="">д╥гн╦╤до</a> <a href="">д╥гн╪р╫д</a>	
 <c:choose>
 	<c:when test="${sessionScope.logon }">
 		<a href="/logout">╥н╠в╬ф©Т</a>
