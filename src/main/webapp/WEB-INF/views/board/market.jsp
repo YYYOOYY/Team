@@ -15,9 +15,24 @@ padding: 1px;
 <body>
 	<h3>캠핑용품을 캠핑어때에서 만나보세요</h3>
 	<div style="text-align: right" >
-		<form action="/board/create">
-		<button>물건등록</button>
-		</form>
+		<div id="fail"> </div>
+		<c:choose>
+			<c:when test="${sessionScope.logon }">
+				<form action="/board/create">
+				<button>물건등록</button>
+				</form>
+			</c:when>
+			<c:otherwise>
+				<button id="logon">물건등록</button>
+					<script>
+						document.querySelector("#logon").onclick = function(evt) {
+						if(${sessionScope.logon } == false){
+							document.querySelector("#fail").innerHTML = '로그인이 필요합니다.'
+							}
+						}
+					</script>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<c:forEach var="boards" items="${boardsAll }">
 		<div>
@@ -31,6 +46,5 @@ padding: 1px;
 		</div>
 		<span style="font-size: 12px">조회 ${boards.viewCount } · 관심 ${boards.interestedCount }</span>
 	</c:forEach>
-	
 </body>
 </html>
