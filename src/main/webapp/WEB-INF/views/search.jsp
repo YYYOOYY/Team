@@ -1,21 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="EUC-KR"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>웰컴페이지</title>
+<title>Insert title here</title>
 </head>
 <body>
-<%@ include file="/common/top.jsp" %>
+	<%@ include file="/common/top.jsp" %>
 	<form action="search">
 		<%-- 키워드검색시작 --%>
 		<input type="text" name="keyword" autocomplete="off">
 		<%-- 키워드검색끝 --%>
 		<%-- 지역별검색시작 --%>
 		<div>
-		<%-- 팔도검색시작 --%>
+		<%-- 팔도검색 시작 --%>
 		<select id="area" name="area">
 			<option value="">전체/도</option>
 			<c:forEach items="${cityList }" var="c">
@@ -25,7 +26,7 @@
 		<select name="city" class="city" data-group>
 			<option value="">전체/시/군</option>
 		</select>
-		<%-- 팔도검색끝 --%>
+		<%-- 팔도검색 끝 --%>
 		<%-- 시/도 시작 --%>
 		<select name="city" style="display: none;" data-group="서울시" class="city">
 			<c:forTokens items="강남구,강동구,강북구,강서구,관악구,광진구,구로구,금천구,노원구,도봉구,동대문구,동작구,마포구,서대문구,서초구,성동구,성북구,송파구,양천구,영등포구,용산구,은평구,종로구,중구,중랑구" delims="," var="city">
@@ -139,5 +140,68 @@
 		<%-- 테마검색끝 --%>
 		<button type="submit">검색</button>
 	</form>
+	<c:forEach items="${camping }" var="c">
+		<div onclick="location.href='/detail?id='" style="border: 1px solid black; cursor: pointer;">
+			<img src="${c.firstImageUrl }" width="100px" height="100px"/> <%-- 메인 이미지 --%>
+			<div>[${c.doNm } ${c.sigunguNm }] ${c.facltNm }</div> <%-- 도 / 시 / 캠핑장이름 --%>
+			<div>${c.lineIntro }</div>  <%-- 펜션 간단한설명 --%>
+			<div>주소: ${c.addr1 } ${c.addr2 }  /  문의: ${c.tel }</div>
+			<div>
+				<c:forTokens items="${c.sbrsCl }" delims="," var="f">
+					${f }
+				</c:forTokens>
+			</div>
+		</div>
+	</c:forEach>
+	<div>
+		<c:set var="currentPage" value="${empty param.pageNo ? 1 : param.pageNo }"/>
+		<%--처음으로--%>
+			<c:if test="${currentPage >= 11}">
+				<c:url value="/search" var="target">
+					<c:param name="pageNo" value="1" />
+				</c:url>
+				<a href="${target}" style="color: black;">&lt;&lt;</a>
+			</c:if>
+		<%----------%>
+		<%--이전버튼--%>
+			<c:if test="${existPrev }">
+				<c:url value="/search" var="target">
+					<c:param name="pageNo" value="${start-1 }" />
+				</c:url>
+				<a href="${target}" style="color: black;">&lt;</a>
+			</c:if>
+		<%----------%>
+		<%--현재 누른 페이지--%>
+			<c:forEach var="p" begin="${start }" end="${last }">
+				<c:url value="/search" var="target">
+					<c:param name="pageNo" value="${p }" />
+				</c:url>
+				<c:choose>
+					<c:when test="${p eq currentPage }">
+						<b style="color: orange;">${p }</b>
+					</c:when>
+					<c:otherwise>
+						<a href="${target }" style="color: black;">${p }</a>
+					</c:otherwise>
+				</c:choose>
+		<%----------------%>
+			</c:forEach>
+		<%--다음버튼 --%>
+			<c:if test="${existNext }">
+				<c:url value="/search" var="target">
+					<c:param name="pageNo" value="${last + 1 }" />
+				</c:url>
+				<a href="${target }" style="color: black;">&gt;</a>
+			</c:if>
+		<%----------%>
+		<%--마지막으로--%>
+			<c:if test="${param.pageNo <= lastPage - lastPage % 10}">
+				<c:url value="/search" var="target">
+					<c:param name="pageNo" value="${lastPage }" />
+				</c:url>
+				<a href="${target}" style="color: black;">&gt;&gt;</a>
+			</c:if>
+		<%----------%>
+		</div>
 </body>
 </html>

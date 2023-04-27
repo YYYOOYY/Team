@@ -5,6 +5,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gson.Gson;
@@ -16,12 +17,15 @@ import data.camping.CampingResult;
 public class OpenDictAPI {
 
 	private static Map<String, CampingItem> cache;
+	static {
+		cache = new HashMap<>();
+	}
 	
-	public static CampingResponse search(String q) {
+	public static CampingResponse search(String pageNo) {
 		try {
-			String targetURL = "http://apis.data.go.kr/B551011/GoCamping";
+			String targetURL = "http://apis.data.go.kr/B551011/GoCamping/basedList";
 			String queryString = "serviceKey=tn2QYKN7gYKzFTZslBMJQMYem10LBYlxadGI%2BmhOWQz9W6mZl4BvvgN8mi7LoY7Dkw5gcYV%2FRx8afw%2F6p%2BlyIg%3D%3D";
-			queryString += "&_type=json&MobileOS=ETC&MobileApp=CAMPING";
+			queryString += "&_type=json&MobileOS=ETC&MobileApp=CAMPING&pageNo="+pageNo;
 
 			URI uri = new URI(targetURL + "?" + queryString);
 			
