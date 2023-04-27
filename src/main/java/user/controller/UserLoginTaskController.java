@@ -35,11 +35,11 @@ public class UserLoginTaskController extends HttpServlet{
 			session.setAttribute("logon", true);
 			session.setAttribute("logonuser", found);
 			req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
+			System.out.println("구현완료");
 			return;
 		} else {
 			resp.sendRedirect("/login?cause=error");
 			return;
 		}
-		
 	}
 }
