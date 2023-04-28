@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import data.camping.CampingItem;
 import data.camping.CampingItems;
 import data.camping.CampingResponse;
-import util.OpenDictAPI;
+import util.GoCampingAPI;
 
 @WebServlet("/search")
 public class SearchController extends HttpServlet{
@@ -23,7 +23,7 @@ public class SearchController extends HttpServlet{
 		
 		String pageNo = req.getParameter("pageNo");
 		
-		CampingResponse camping = OpenDictAPI.search(pageNo);
+		CampingResponse camping = GoCampingAPI.search(pageNo);
 		
 		if(camping != null) {
 			req.setAttribute("camping", camping.getBody().getItems().getItem());

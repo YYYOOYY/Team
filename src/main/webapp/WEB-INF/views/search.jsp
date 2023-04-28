@@ -141,8 +141,17 @@
 		<button type="submit">검색</button>
 	</form>
 	<c:forEach items="${camping }" var="c">
-		<div onclick="location.href='/detail?id='" style="border: 1px solid black; cursor: pointer;">
-			<img src="${c.firstImageUrl }" width="100px" height="100px"/> <%-- 메인 이미지 --%>
+		<div onclick="location.href='/detail?id=${c.contentId}'" style="border: 1px solid black; cursor: pointer;">
+			<%-- 메인이미지 시작 --%>
+			<c:choose>
+				<c:when test="${c.firstImageUrl == '' }">
+					<img src="/resource/img/logo.png"  width="100px" height="100px"/>
+				</c:when>
+				<c:otherwise>
+					<img src="${c.firstImageUrl }" width="100px" height="100px"/>
+				</c:otherwise>
+			</c:choose>
+			<%-- 메인이미지 끝 --%>
 			<div>[${c.doNm } ${c.sigunguNm }] ${c.facltNm }</div> <%-- 도 / 시 / 캠핑장이름 --%>
 			<div>${c.lineIntro }</div>  <%-- 펜션 간단한설명 --%>
 			<div>주소: ${c.addr1 } ${c.addr2 }  /  문의: ${c.tel }</div>
