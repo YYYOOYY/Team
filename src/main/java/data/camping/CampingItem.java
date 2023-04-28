@@ -85,7 +85,13 @@ public class CampingItem {
 	// 애견동반 가능 유무 ex) 가능 or 불가능
 	String animalCmgCl;
 	
-	// 주변 가능한 취미?
+	// 개인 트레일러 입장가능 유무
+	String trlerAcmpnyAt;
+	
+	// 개인 카라반 입장가능 유무
+	String caravAcmpnyAt;
+	
+	// 주변 가능한 시설
 	String posblFcltyCl;
 	
 	// 캠핑장 태그
@@ -163,7 +169,21 @@ public class CampingItem {
 	// 화재감시기
 	String fireSensorCo;
 	
+	// 캠핑장비대여
+	String eqpmnLendCl;
 	
+	public String getTrlerAcmpnyAt() {
+		return trlerAcmpnyAt;
+	}
+
+	public String getCaravAcmpnyAt() {
+		return caravAcmpnyAt;
+	}
+
+	public String getEqpmnLendCl() {
+		return eqpmnLendCl;
+	}
+
 	public String getFacltNm() {
 		return facltNm;
 	}

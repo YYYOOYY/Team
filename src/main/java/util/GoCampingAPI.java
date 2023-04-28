@@ -14,7 +14,7 @@ import data.camping.CampingItem;
 import data.camping.CampingResponse;
 import data.camping.CampingResult;
 
-public class OpenDictAPI {
+public class GoCampingAPI {
 
 	private static Map<String, CampingItem> cache;
 	static {
@@ -49,8 +49,8 @@ public class OpenDictAPI {
 		}
 	}
 	
-	public static CampingItem findByDesertionNo(String no) {
-		return cache.get(no);
+	public static CampingItem findByCampingItem(String id) {
+		return cache.get(id);
 	}
 	
 }
