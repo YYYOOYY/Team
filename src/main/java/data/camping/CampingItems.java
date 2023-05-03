@@ -1,9 +1,11 @@
 package data.camping;
 
-public class CampingItems {
-	CampingItem[] item;
+import java.util.List;
 
-	public CampingItem[] getItem() {
+public class CampingItems {
+	List<CampingItem> item;
+
+	public List<CampingItem> getItem() {
 		return item;
 	}
 	

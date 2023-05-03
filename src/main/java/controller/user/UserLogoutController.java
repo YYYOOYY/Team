@@ -16,6 +16,15 @@ public class UserLogoutController extends HttpServlet {
 		HttpSession session = req.getSession();
 		session.setAttribute("logon", false);
 		session.removeAttribute("logonUser");
-		req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
+		
+		int r = (int)session.getAttribute("cate");
+		
+		if (r == 1) {
+			resp.sendRedirect("/search");
+		} else if (r == 2) {
+			resp.sendRedirect("/board/market");
+		} else {
+			resp.sendRedirect("/index");
+		}
 	}
 }

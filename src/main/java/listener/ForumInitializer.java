@@ -10,11 +10,15 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import util.GoCampingAPI;
+
 @WebListener
 public class ForumInitializer implements ServletContextListener {
 	
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
+		
+		GoCampingAPI.loadOn();
 		try {
 			//  예전 방식의 DAO 에서 필요한 코드니까 살려두고..!
 			Class.forName("oracle.jdbc.driver.OracleDriver");
