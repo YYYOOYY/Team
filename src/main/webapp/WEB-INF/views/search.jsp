@@ -1,160 +1,149 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="EUC-KR"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+	pageEncoding="EUC-KR"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>캠핑어때?!</title>
 </head>
 <body>
-	<%@ include file="/common/top.jsp" %>
-	<form action="search">
+	<%@ include file="/common/top.jsp"%>
+	<form action="/search">
 		<%-- 키워드검색시작 --%>
-		<input type="text" name="keyword" autocomplete="off">
+		<input type="text" name="search_01" class="col-2" placeholder="검색"
+			autocomplete="off">
 		<%-- 키워드검색끝 --%>
 		<%-- 지역별검색시작 --%>
 		<div>
-		<%-- 팔도검색 시작 --%>
-		<select id="area" name="area">
-			<option value="">전체(도)</option>
-			<c:forEach items="${cityList }" var="c">
-				<option value="${c }">${c }</option>
-			</c:forEach>
-		</select>
-		<select name="city" class="city" data-group>
-			<option value="">전체(시/군)</option>
-		</select>
-		<%-- 팔도검색 끝 --%>
-		<%-- 시/도 시작 --%>
-		<select name="city" style="display: none;" data-group="서울시" class="city">
-			<c:forTokens items="강남구,강동구,강북구,강서구,관악구,광진구,구로구,금천구,노원구,도봉구,동대문구,동작구,마포구,서대문구,서초구,성동구,성북구,송파구,양천구,영등포구,용산구,은평구,종로구,중구,중랑구" delims="," var="city">
-				<option value="${city }">${city }</option>
-			</c:forTokens>
-		</select>
-		<select name="city" style="display: none;" data-group="부산시" class="city">
-			<c:forTokens items="강서구,금정구,기장군,남구,동구,동래구,부산진구,북구,사상구,사하구,서구,수영구,연제구,영도구,중구,해운대구" delims="," var="city">
-				<option value="${city }">${city }</option>
-			</c:forTokens>
-		</select>
-		<select name="city" style="display: none;" data-group="대구시" class="city">
-			<c:forTokens items="남구,달서구,달성군,동구,북구,상주,서구,수성구,중구" delims="," var="city">
-				<option value="${city }">${city }</option>
-			</c:forTokens>
-		</select>
-		<select name="city" style="display: none;" data-group="인천시" class="city">
-			<c:forTokens items="강화군,계양구,남구,남동구,동구,부평구,서구,연수구,옹진군,중구" delims="," var="city">
-				<option value="${city }">${city }</option>
-			</c:forTokens>
-		</select>
-		<select name="city" style="display: none;" data-group="광주시" class="city">
-			<c:forTokens items="광산구,남구,동구,북구,서구" delims="," var="city">
-				<option value="${city }">${city }</option>
-			</c:forTokens>
-		</select>
-		<select name="city" style="display: none;" data-group="대전시" class="city">
-			<c:forTokens items="대덕구,동구,서구,유성구,중구" delims="," var="city">
-				<option value="${city }">${city }</option>
-			</c:forTokens>
-		</select>
-		<select name="city" style="display: none;" data-group="울산시" class="city">
-			<c:forTokens items="남구,동구,북구,울주군,중구" delims="," var="city">
-				<option value="${city }">${city }</option>
-			</c:forTokens>
-		</select>
-		<select name="city" style="display: none;" data-group="세종시" class="city">
-			<c:forTokens items="금남면,세종시,소정면,연서면,전동면" delims="," var="city">
-				<option value="${city }">${city }</option>
-			</c:forTokens>
-		</select>
-		<select name="city" style="display: none;" data-group="경기도" class="city">
-			<c:forTokens items="가평군,고양시,과천시,광명시,광주시,구리시,군포시,김포시,남양주시,동두천시,부천시,성남시,수원시,시흥시,안산시,안성시,안양시,양주시,양평군,여주시,연천군,오산시,용인시,의왕시,의정부시,이천시,파주시,평택시,포천시,하남시,화성시" delims="," var="city">
-				<option value="${city }">${city }</option>
-			</c:forTokens>
-		</select>
-		<select name="city" style="display: none;" data-group="강원도" class="city">
-			<c:forTokens items="강릉시,고성군,동해시,삼척시,속초시,양구군,양양군,영월군,원주시,인제군,정선군,철원군,춘천시,태백시,평창군,홍천군,화천군,횡성군" delims="," var="city">
-				<option value="${city }">${city }</option>
-			</c:forTokens>
-		</select>
-		<select name="city" style="display: none;" data-group="충청북도" class="city">
-			<c:forTokens items="괴산군,단양군,보은군,영동군,옥천군,음성군,제천시,증평군,진천군,청원군,청주시,충주시" delims="," var="city">
-				<option value="${city }">${city }</option>
-			</c:forTokens>
-		</select>
-		<select name="city" style="display: none;" data-group="충청남도" class="city">
-			<c:forTokens items="계룡시,공주시,금산군,논산시,당진시,보령시,부여군,서산시,서천군,아산시,예산군,천안시,청양군,태안군,홍성군" delims="," var="city">
-				<option value="${city }">${city }</option>
-			</c:forTokens>
-		</select>
-		<select name="city" style="display: none;" data-group="전라북도" class="city">
-			<c:forTokens items="고창군,군산시,김제시,남원시,무주군,부안군,순창군,완주군,익산시,임실군,장수군,전주시,정읍시,진안군" delims="," var="city">
-				<option value="${city }">${city }</option>
-			</c:forTokens>
-		</select>
-		<select name="city" style="display: none;" data-group="전라남도" class="city">
-			<c:forTokens items="강진군,고흥군,곡성군,광양시,구례군,나주시,담양군,목포시,무안군,보성군,순천시,신안군,여수시,영광군,영암군,완도군,장성군,장흥군,진도군,함평군,해남군,화순군" delims="," var="city">
-				<option value="${city }">${city }</option>
-			</c:forTokens>
-		</select>
-		<select name="city" style="display: none;" data-group="경상북도" class="city">
-			<c:forTokens items="경산시,경주시,고령군,구미시,군위군,김천시,문경시,봉화군,상주시,성주군,안동시,영덕군,영양군,영주시,영천시,예천군,울릉군,울진군,의성군,청도군,청송군,칠곡군,포항시" delims="," var="city">
-				<option value="${city }">${city }</option>
-			</c:forTokens>
-		</select>
-		<select name="city" style="display: none;" data-group="경상남도" class="city">
-			<c:forTokens items="거제시,거창군,고성군,김해시,남해군,밀양시,사천시,산청군,양산시,의령군,진주시,창녕군,창원시,통영시,하동군,함안군,함양군,합천군" delims="," var="city">
-				<option value="${city }">${city }</option>
-			</c:forTokens>
-		</select>
-		<select name="city" style="display: none;" data-group="제주도" class="city">
-			<c:forTokens items="서귀포시,제주시" delims="," var="city">
-				<option value="${city }">${city }</option>
-			</c:forTokens>
-		</select>
-		<%-- 시/도 끝 --%>
+			<%-- 팔도검색 시작 --%>
+			<select id="area" name="search_02" class="col-2-1">
+				<option value="">전체(도)</option>
+				<c:forEach items="${cityList }" var="c">
+					<option value="${c }" ${param.area eq c ? 'selected' : '' }>${c }</option>
+				</c:forEach>
+			</select>
+			<%-- 팔도검색 끝 --%>
+			<%-- 시/도 시작 --%>
+			<select name="search_03" class="col-2-3" data-group="">
+				<option value="" selected>전체/시/군</option>
+			</select> 
+			<select style="display: none;" data-group="서울시" class="col-2-3">
+				<c:forEach items="${seoul }" var="c">
+					<option value="${c }">${c }</option>
+				</c:forEach>
+			</select> <select style="display: none;" data-group="부산시" class="col-2-3">
+				<c:forEach items="${busan }" var="c">
+					<option value="${c }">${c }</option>
+				</c:forEach>
+			</select> <select style="display: none;" data-group="대구시" class="col-2-3">
+				<c:forEach items="${daegu }" var="c">
+					<option value="${c }">${c }</option>
+				</c:forEach>
+			</select> <select style="display: none;" data-group="인천시" class="col-2-3">
+				<c:forEach items="${incheon }" var="c">
+					<option value="${c }">${c }</option>
+				</c:forEach>
+			</select> <select style="display: none;" data-group="광주시" class="col-2-3">
+				<c:forEach items="${gwangju }" var="c">
+					<option value="${c }">${c }</option>
+				</c:forEach>
+			</select> <select style="display: none;" data-group="대전시" class="col-2-3">
+				<c:forEach items="${daejeon }" var="c">
+					<option value="${c }">${c }</option>
+				</c:forEach>
+			</select> <select style="display: none;" data-group="울산시" class="col-2-3">
+				<c:forEach items="${ulsan }" var="c">
+					<option value="${c }">${c }</option>
+				</c:forEach>
+			</select> <select style="display: none;" data-group="세종시" class="col-2-3">
+				<c:forEach items="${sejong }" var="c">
+					<option value="${c }">${c }</option>
+				</c:forEach>
+			</select> <select style="display: none;" data-group="경기도" class="col-2-3">
+				<c:forEach items="${gyeonggi }" var="c">
+					<option value="${c }">${c }</option>
+				</c:forEach>
+			</select> <select style="display: none;" data-group="강원도" class="col-2-3">
+				<c:forEach items="${gangwon }" var="c">
+					<option value="${c }">${c }</option>
+				</c:forEach>
+			</select> <select style="display: none;" data-group="충청북도" class="col-2-3">
+				<c:forEach items="${chungcheongbuk }" var="c">
+					<option value="${c }">${c }</option>
+				</c:forEach>
+			</select> <select style="display: none;" data-group="충청남도" class="col-2-3">
+				<c:forEach items="${chungcheongnam }" var="c">
+					<option value="${c }">${c }</option>
+				</c:forEach>
+			</select> <select style="display: none;" data-group="전라북도" class="col-2-3">
+				<c:forEach items="${jeollabuk }" var="c">
+					<option value="${c }">${c }</option>
+				</c:forEach>
+			</select> <select style="display: none;" data-group="전라남도" class="col-2-3">
+				<c:forEach items="${jeollanam }" var="c">
+					<option value="${c }">${c }</option>
+				</c:forEach>
+			</select> <select style="display: none;" data-group="경상북도" class="col-2-3">
+				<c:forEach items="${gyeongsangbuk }" var="c">
+					<option value="${c }">${c }</option>
+				</c:forEach>
+			</select> <select style="display: none;" data-group="경상남도" class="col-2-3">
+				<c:forEach items="${gyeongsangnam }" var="c">
+					<option value="${c }">${c }</option>
+				</c:forEach>
+			</select> <select style="display: none;" data-group="제주도" class="col-2-3">
+				<c:forEach items="${jeju }" var="c">
+					<option value="${c }">${c }</option>
+				</c:forEach>
+			</select>
+			<%-- 시/도 끝 --%>
 		</div>
 		<script>
-			document.querySelector("#area").onchange = function(evt) {
-				document.querySelectorAll(".city").forEach(function(one) {
-					console.log(evt, one)
-					if(one.dataset.group != evt.target.value){
+			const cityLoad = function(evt) {
+				document.querySelectorAll(".col-2-3").forEach(function(one) {
+					if (one.dataset.group != evt.target.value) {
+						one.name = "";
 						one.style.display = "none";
-					}else{
+					} else {
+						one.name = "search_03";
 						one.style.display = "";
 					}
 				})
 			};
+			document.querySelector("#area").onchange = cityLoad;
+
+			document.onloadend = cityLoad;
 		</script>
 		<%-- 지역별검색끝 --%>
 		<%-- 테마검색시작 --%>
-		<div>
-		<select name="thema">
-			<option value="">전체</option>
+		<select name="search_04" class="col-2">
+			<option value="" selected>테마</option>
 			<c:forEach items="${themaList }" var="t">
-				<option value="${t }">${t }</option>
+				<option value="${t }" ${param.thema eq t ? 'selected' : '' }>${t }</option>
 			</c:forEach>
 		</select>
-		</div>
 		<%-- 테마검색끝 --%>
-		<button type="submit">검색</button>
+		<button type="submit" class="col-2">검색</button>
 	</form>
 	<c:forEach items="${camping }" var="c">
-		<div onclick="location.href='/detail?id=${c.contentId}'" style="border: 1px solid black; cursor: pointer;">
+		<div onclick="location.href='/detail?id=${c.contentId}'"
+			style="border: 1px solid black; cursor: pointer;">
 			<%-- 메인이미지 시작 --%>
 			<c:choose>
-				<c:when test="${c.firstImageUrl == '' }">
-					<img src="/resource/img/logo.png"  width="100px" height="100px"/>
+				<c:when test="${empty c.firstImageUrl }">
+					<img src="/resource/img/logo_01.png" width="100px" height="100px" />
 				</c:when>
 				<c:otherwise>
-					<img src="${c.firstImageUrl }" width="100px" height="100px"/>
+					<img src="${c.firstImageUrl }" width="100px" height="100px" />
 				</c:otherwise>
 			</c:choose>
 			<%-- 메인이미지 끝 --%>
-			<div>[${c.doNm } ${c.sigunguNm }] ${c.facltNm }</div> <%-- 도 / 시 / 캠핑장이름 --%>
-			<div>${c.lineIntro }</div>  <%-- 펜션 간단한설명 --%>
-			<div>주소: ${c.addr1 } ${c.addr2 }  /  문의: ${c.tel }</div>
+			<div>[${c.doNm } ${c.sigunguNm }] ${c.facltNm }</div>
+			<%-- 도 / 시 / 캠핑장이름 --%>
+			<div>${c.lineIntro }</div>
+			<%-- 펜션 간단한설명 --%>
+			<div>주소: ${c.addr1 } ${c.addr2 } / 문의: ${c.tel }</div>
 			<div>
 				<c:forTokens items="${c.sbrsCl }" delims="," var="f">
 					${f }
@@ -162,55 +151,87 @@
 			</div>
 		</div>
 	</c:forEach>
+	<!-- 페이징 처리 시작-->
 	<div>
-		<c:set var="currentPage" value="${empty param.pageNo ? 1 : param.pageNo }"/>
+		<c:set var="currentPage"
+			value="${empty param.pageNo ? 1 : param.pageNo }" />
 		<%--처음으로--%>
-			<c:if test="${currentPage >= 11}">
-				<c:url value="/search" var="target">
-					<c:param name="pageNo" value="1" />
-				</c:url>
-				<a href="${target}" style="color: black;">&lt;&lt;</a>
-			</c:if>
+		<c:if test="${currentPage >= 11}">
+			<c:url value="/search" var="target">
+				<c:param name="pageNo" value="1" />
+				<c:param name="area" value="${param.area }" />
+				<c:param name="city" value="${param.city }" />
+				<c:param name="thema" value="${param.thema }" />
+				<c:param name="keyword" value="${param.keyword }" />
+			</c:url>
+			<a href="${target}" style="color: black;">&lt;&lt;</a>
+		</c:if>
 		<%----------%>
 		<%--이전버튼--%>
-			<c:if test="${existPrev }">
-				<c:url value="/search" var="target">
-					<c:param name="pageNo" value="${start-1 }" />
-				</c:url>
-				<a href="${target}" style="color: black;">&lt;</a>
-			</c:if>
+		<c:if test="${existPrev }">
+			<c:url value="/search" var="target">
+				<c:param name="pageNo" value="${start-1 }" />
+				<c:param name="area" value="${param.area }" />
+				<c:param name="city" value="${param.city }" />
+				<c:param name="thema" value="${param.thema }" />
+				<c:param name="keyword" value="${param.keyword }" />
+			</c:url>
+			<a href="${target}" style="color: black;">&lt;</a>
+		</c:if>
 		<%----------%>
 		<%--현재 누른 페이지--%>
-			<c:forEach var="p" begin="${start }" end="${last }">
-				<c:url value="/search" var="target">
-					<c:param name="pageNo" value="${p }" />
-				</c:url>
-				<c:choose>
-					<c:when test="${p eq currentPage }">
-						<b style="color: orange;">${p }</b>
-					</c:when>
-					<c:otherwise>
-						<a href="${target }" style="color: black;">${p }</a>
-					</c:otherwise>
-				</c:choose>
-		<%----------------%>
-			</c:forEach>
+		<c:forEach var="p" begin="${start }" end="${last }">
+			<c:url value="/search" var="target">
+				<c:param name="pageNo" value="${p }" />
+				<c:param name="area" value="${param.area }" />
+				<c:param name="city" value="${param.city }" />
+				<c:param name="thema" value="${param.thema }" />
+				<c:param name="keyword" value="${param.keyword }" />
+			</c:url>
+			<c:choose>
+				<c:when test="${p eq currentPage }">
+					<b style="color: orange;">${p }</b>
+				</c:when>
+				<c:otherwise>
+					<a href="${target }" style="color: black;">${p }</a>
+				</c:otherwise>
+			</c:choose>
+			<%----------------%>
+		</c:forEach>
 		<%--다음버튼 --%>
-			<c:if test="${existNext }">
-				<c:url value="/search" var="target">
-					<c:param name="pageNo" value="${last + 1 }" />
-				</c:url>
-				<a href="${target }" style="color: black;">&gt;</a>
-			</c:if>
+		<c:if test="${existNext }">
+			<c:url value="/search" var="target">
+				<c:param name="pageNo" value="${last + 1 }" />
+				<c:param name="area" value="${param.area }" />
+				<c:param name="city" value="${param.city }" />
+				<c:param name="thema" value="${param.thema }" />
+				<c:param name="keyword" value="${param.keyword }" />
+			</c:url>
+			<a href="${target }" style="color: black;">&gt;</a>
+		</c:if>
 		<%----------%>
 		<%--마지막으로--%>
-			<c:if test="${param.pageNo <= lastPage - lastPage % 10}">
-				<c:url value="/search" var="target">
-					<c:param name="pageNo" value="${lastPage }" />
-				</c:url>
-				<a href="${target}" style="color: black;">&gt;&gt;</a>
-			</c:if>
+		<c:if test="${param.pageNo <= lastPage - lastPage % 10}">
+			<c:url value="/search" var="target">
+				<c:param name="pageNo" value="${lastPage }" />
+				<c:param name="area" value="${param.area }" />
+				<c:param name="city" value="${param.city }" />
+				<c:param name="thema" value="${param.thema }" />
+				<c:param name="keyword" value="${param.keyword }" />
+			</c:url>
+			<a href="${target}" style="color: black;">&gt;&gt;</a>
+		</c:if>
 		<%----------%>
-		</div>
+		<!-- 페이징처리 끝 -->
+	</div>
+	<script>
+		document.querySelector("#area").dispatchEvent(new Event("change"));
+		document.querySelectorAll(".col-2-3").forEach(one=>{
+			if(one.dataset.group === document.querySelector("#area").value) {
+				one.name="search_03";
+				one.value="${param.city}";
+			}
+		});
+	</script>
 </body>
 </html>

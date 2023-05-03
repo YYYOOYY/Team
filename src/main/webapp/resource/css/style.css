@@ -1,0 +1,298 @@
+@charset "EUC-KR";
+
+
+/* reset */
+* {
+    margin: 0; 
+    padding: 0; 
+    font-size: 15px;
+}
+
+body {
+    max-width: 1190px;
+    margin: 0 auto;
+}
+li {
+    list-style: none;
+}
+
+a {
+    color: #333; 
+    text-decoration: none;
+}
+
+.clearfix::before, 
+.clearfix::after {
+    display: block; 
+    content: ''; 
+    clear:both;
+}
+
+/* font */
+h1, h2, h3, h4, h5, h6, p, span, li {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* body */
+body {
+    background-image: url("/resource/img/camping-4303357_1280.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+/* header */
+.header {
+    width: 100%;
+    height: 100%;
+  }
+
+.section {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    padding-top: 20px;
+    cursor: pointer;
+}
+
+.logo img {
+    width: 80px;
+    /* flex: 1; */
+    padding: 0 0 0 30px;
+    line-height: 2.75;
+}
+
+.nav {
+    flex: 8;
+}
+
+.nav ul {
+    display: flex;
+    justify-content: center;
+}
+
+.nav ul li {
+    font-size: 20px;
+    margin: 0 2rem;
+    line-height: 6.25;
+}
+
+.nav a {
+    color: #fff;
+}
+
+.login {
+    /* flex: 3; */
+    padding-top: 27px;
+}
+
+.login ul {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.login ul li {
+    font-size: 14px;
+    line-height: 5.0;
+    margin-right: 10px;
+    color: #fff;
+}
+
+.login a {
+    color: #fff;
+}
+
+/* login popup */
+.layer_bg {
+    display: none;
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0,0,0,0.7);
+    position: fixed; 
+    left: 0; 
+    top: 0; 
+    z-index: 1000   
+}
+    
+.layer {
+    padding: 50px 70px;
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: stretch;
+
+    width: 500px; 
+    height: 400px; 
+    background: #fff;
+    border: 2px solid #000;
+    position: absolute; 
+    left: 50%; 
+    top: 50%; 
+    z-index: 1000;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.layer_h4 {
+	padding: 20px; 
+	font-size: 30px;
+	text-align: center;
+}
+
+.login-input {
+    display: flex;
+	margin: 0.8rem 0; 
+	box-sizing: border-box;
+	text-align: center;
+}
+
+.layer input {
+    padding: 18px 10px;
+    color: #ccc;
+}
+
+.layer input::placeholder {
+    color: #ccc;
+}
+
+.button_1 {
+    padding: 18px 10px;
+    margin-top: 1rem;
+	background: #000;
+	color: #fff;
+	width: 100%; 
+    border: 1px solid #ccc; 
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.layer_close {
+	position: absolute; 
+	top: 20px; 
+	right: 30px; 
+	font-size: 20px;
+}
+
+.login_join {
+    padding: 5px 0px;
+    margin-top: 1rem;
+	color: #ccc;
+	width: 100%; 
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.login_join p a {
+    cursor: pointer;
+    padding-left:8px;
+    font-weight: bold;
+    color: #5fb6de;
+}
+
+.login_ad, .join_ad {
+	cursor: pointer;
+}
+
+/* join popup */
+.layer_bg_join {
+    display: none;
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0,0,0,0.7);
+    position: fixed; 
+    left: 0; 
+    top: 0; 
+    z-index: 1000   
+}
+
+.layer_join {
+    padding: 50px 70px;
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: stretch;
+
+    width: 500px; 
+    height: 700px; 
+    background: #fff;
+    border: 2px solid #000;
+    position: absolute; 
+    left: 50%; 
+    top: 50%; 
+    z-index: 1000;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.join_h4 {
+	padding: 20px; 
+	font-size: 30px;
+	text-align: center;
+    color: #5fb6de;
+}
+
+.button_2 {
+    padding: 18px 10px;
+    margin-top: 1rem;
+	background: #5fb6de;
+	color: #fff;
+	width: 100%; 
+    border: 1px solid #ccc; 
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* main search */
+.search_wrap {
+    width: 1190px;
+    color: #fff;
+}
+
+.search_wrap .search_inner {
+    width: 80%;
+    padding: 60px;
+    margin: 0 auto;
+    background: rgba(0,0,0,0.5);
+}
+
+.col {
+    display: flex;
+}
+.col-2 {
+    flex: 2;
+}
+.col-2-1 {
+    flex: 2;
+}
+.col-2-3 {
+    flex: 2;
+}
+.col-10 {
+    flex: 10;
+}
+
+.text-center {
+    text-align: center;
+}
+
+input[name=search_01],[name=search_02], select, option {
+    padding: 18px 10px;
+}
+
+button {
+    cursor: pointer;
+  /*  background-color: #ccc; */
+}

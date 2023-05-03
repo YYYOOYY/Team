@@ -26,11 +26,11 @@
 		<%-- 사진 --%>
 		<div style="flex: 5.5">
 			<c:choose>
-				<c:when test="${camping.firstImageUrl == '' }">
-					<img src="/resource/img/logo.png"  width="600px" height="500px"/>
+				<c:when test="${empty camping.firstImageUrl }">
+					<img src="/resource/img/logo_01.png"  width="600px" height="500px"/>
 				</c:when>
 				<c:otherwise>
-					<img src="${camping.firstImageUrl }" width="600px" height="500px"/>
+					<img src="${camping.firstImageUrl }" width="600px" height="500px" onerror="this.src='/resource/img/logo_01.png'"/>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -58,24 +58,24 @@
 		<%-- 사진3개 --%>
 		<div style="flex: 6">
 			<c:choose>
-				<c:when test="${imgs[0] == null }">
-					<img src="/resource/img/logo.png" width="200px" height="180px"/>
+				<c:when test="${empty imgs[0] }">
+					<img src="/resource/img/logo_01.png" width="200px" height="180px"/>
 				</c:when>
 				<c:otherwise>
 					<img src="${imgs[0] }" width="200px" height="180px"/>
 				</c:otherwise>
 			</c:choose>
 			<c:choose>
-				<c:when test="${imgs[1] == null }">
-					<img src="/resource/img/logo.png" width="200px" height="180px"/>
+				<c:when test="${empty imgs[1] }">
+					<img src="/resource/img/logo_01.png" width="200px" height="180px"/>
 				</c:when>
 				<c:otherwise>
 					<img src="${imgs[1] }" width="200px" height="180px"/>
 				</c:otherwise>
 			</c:choose>
 			<c:choose>
-				<c:when test="${imgs[2] == null }">
-					<img src="/resource/img/logo.png" width="200px" height="180px"/>
+				<c:when test="${empty imgs[2] }">
+					<img src="/resource/img/logo_01.png" width="200px" height="180px"/>
 				</c:when>
 				<c:otherwise>
 					<img src="${imgs[2] }" width="200px" height="180px"/>
@@ -233,11 +233,10 @@
 			</div>
 		</c:if>
 	</div>
-	
 	<%-- 고캠핑기준 사진들 --%>
 	<div style="border: 1px solid black;">
 		<c:forEach items="${images }" var="i">
-			<img src="${i }" width="150px" height="120px">
+			<img src="${i }" width="150px" height="120px" onerror="this.style='display: none'"/>
 		</c:forEach>
 	</div>
 </body>

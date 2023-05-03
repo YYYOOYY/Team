@@ -36,7 +36,7 @@ public class UserLoginTaskController extends HttpServlet {
 			session.setAttribute("logon", true);
 			session.setAttribute("logonuser", found);
 
-			int r = (int) session.getAttribute("cate");
+			int r = (int)session.getAttribute("cate");
 			if (r == 1) {
 				resp.sendRedirect("/search");
 			} else if (r == 2) {

@@ -30,7 +30,9 @@ public class DetailController extends HttpServlet{
 			
 			List<String> li = new ArrayList<>();
 			for(ImageItem i : items) {
-				li.add(i.getImageUrl());
+				String[] strs = i.getImageUrl().split("/");
+
+				li.add(strs[0]+"//"+strs[2]+"/"+strs[3]+"/"+strs[4]+"/"+strs[5]+"/thumb/thumb_1000_"+strs[6]);
 			}
 			
 			req.setAttribute("images", li);
@@ -40,6 +42,7 @@ public class DetailController extends HttpServlet{
 		if(imgs != null) {
 			for(int i = 0; i < strs.length; i++) {
 				strs[i] = imgs.getBody().getItems().getItem()[i+1].getImageUrl();
+				
 			}
 			req.setAttribute("imgs", strs);
 		}
