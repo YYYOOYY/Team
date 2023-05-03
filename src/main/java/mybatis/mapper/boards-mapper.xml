@@ -6,4 +6,32 @@
 	<select id="findByBoardsAll" resultType="data.board.Board" >  
 		SELECT * FROM BOARDS ORDER BY WRITED DESC
 	</select>
+	<insert id="create" parameterType="hashMap">
+		INSERT INTO BOARDS (CODE, WRITER, TITLE, BODY, PRICE, IMG)
+		VALUES (BOARDS_SEQ.NEXTVAL, #{writer}, #{title}, #{body}, #{price}, #{img} )
+	</insert>
+	<select id="findByBoardCode" resultType="data.board.Board" parameterType="string">
+		SELECT * FROM BOARDS WHERE CODE= #{code}
+	</select>
+	<update id="updateViewCount" parameterType="string">
+		UPDATE BOARDS SET VIEW_COUNT = VIEW_COUNT + 1
+		WHERE CODE= #{code}
+	</update>
+	<update id="updateInterestCount" parameterType="string">
+		UPDATE BOARDS SET INTERESTED_COUNT = INTERESTED_COUNT + 1
+		WHERE CODE= #{code}
+	</update>
+		<insert id="interest" parameterType="hashmap">
+		INSERT INTO INTERESTED 
+		VALUES (#{boardCode}, #{userId} )
+	</insert>
+	<select id="checkByInterested" resultType="data.interested.Interested" parameterType="hashmap">
+		SELECT * FROM INTERESTED WHERE BOARDS_CODE= #{boardsCode} AND USER_ID= #{userId}
+	</select>
+	<update id="modify" parameterType="hashmap">
+		UPDATE BOARDS SET TITLE= #{title}, BODY= #{body}, PRICE= #{price}, IMG= #{img} WHERE CODE= #{code}
+	</update>
+	<delete id="delete">
+		DELETE FROM BOARDS WHERE CODE= #{code}
+	</delete>
 </mapper>
