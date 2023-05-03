@@ -12,7 +12,7 @@ public class Board {
 	// 글 내용
 	String body;
 	// 글 작성일
-	Date wirted;
+	Date writed;
 	// 관심수 
 	int interestedCount;
 	// 조회수
@@ -55,11 +55,11 @@ public class Board {
 	public void setBody(String body) {
 		this.body = body;
 	}
-	public Date getWirted() {
-		return wirted;
+	public Date getWrited() {
+		return writed;
 	}
-	public void setWirted(Date wirted) {
-		this.wirted = wirted;
+	public void setWrited(Date wirted) {
+		this.writed = wirted;
 	}
 	public int getInterestedCount() {
 		return interestedCount;

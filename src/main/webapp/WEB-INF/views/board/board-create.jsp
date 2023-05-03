@@ -18,18 +18,19 @@
 </style>
 </head>
 <body>
+	<%--중고거래 게시판 물품 등록--%>
 	<h3>거래하고싶은 물품을 등록하세요</h3>
-	<form action="/board/create-task" method="post" enctype="multipart/from-data">
+	<form action="/board/create-task" method="post" enctype="multipart/form-data">
 		<div>
 			제목 : 
 			<input type="text" name="title" placeholder="제목을 입력하세요" />
-			<input type="file" placeholder="파일선택" name="img" />
+			<input type="file" placeholder="파일선택" name="img" accept="image/*"/>
 		</div>
 		<div>
-			<textarea  style="width: 45%; height: 120px; resize: none" name="body" placeholder="내용을 입력하세요"></textarea>
+			<textarea  style="width: 45%; height: 120px; resize: none" name="body" placeholder="캠핑용품을 올리고 내용을 작성해주세요.(판매 금지 물품은 게시가 제한될 수 있어요.)"></textarea>
 		</div>
 		<div>
-			물품가격 :
+			가격 :
 			<input type="text" name="price" placeholder="물품가격을 입력하세요"/>
 			<button type="submit">등록</button>
 		</div>

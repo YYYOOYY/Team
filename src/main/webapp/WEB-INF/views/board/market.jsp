@@ -20,11 +20,11 @@ padding: 1px;
 		<c:choose>
 			<c:when test="${sessionScope.logon }">
 				<form action="/board/create">
-				<button>물건등록</button>
+				<button>게시글 쓰기</button>
 				</form>
 			</c:when>
 			<c:otherwise>
-				<button id="logon">물건등록</button>
+				<button id="logon">게시글 쓰기</button>
 					<script>
 						document.querySelector("#logon").onclick = function(evt) {
 							var returnValue = confirm('로그인이 필요합니다.');
@@ -38,7 +38,9 @@ padding: 1px;
 	</div>
 	<c:forEach var="boards" items="${boardsAll }">
 		<div>
+			<a href="/board/detail?code=${boards.code }">
 			<img src="${boards.img }" style ="border-radius: 20px; max-width: 15%"/>
+			</a>
 		</div>
 		<div>
 			${boards.title }
