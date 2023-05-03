@@ -63,7 +63,7 @@ public class GoCampingAPI {
 			}
 		}
 		return found;
-//		return cache.stream().filter(t -> t.getContentId().equals(id)).findFirst().get();
+		// return cache.stream().filter(t -> t.getContentId().equals(id)).findFirst().get();
 	}
 	
 	public static List<CampingItem> find(String area, String city, String thema, String keyword) {
