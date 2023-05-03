@@ -75,12 +75,13 @@ public class GoCampingAPI {
 			if(!city.equals("") && !t.getSigunguNm().equals(city)) {
 				continue;
 			}
-			if(!thema.equals("") && !t.getLctCl().equals(thema)) {
+			if(!thema.equals("") && !t.getLctCl().contains(thema)) {
 				continue;
 			}
 			if(!keyword.equals("") && !t.getFacltNm().contains(keyword)) {
 				continue;
 			}
+			System.out.println(t.getLctCl());
 			found.add(t);
 		}
 		return found;
