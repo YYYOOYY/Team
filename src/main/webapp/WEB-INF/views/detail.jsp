@@ -239,5 +239,35 @@
 			<img src="${i }" width="150px" height="120px" onerror="this.style='display: none'"/>
 		</c:forEach>
 	</div>
+	
+	<div id="map" style="width: 400px; height: 300px; max-width: 400px; border: 1px solid black;">-</div>
+		<c:if test="${camping.mapX eq '' || camping.mapY eq '' }">
+			위치가 정확하지 않아 지도를 불러오지 못했습니다.
+		</c:if>
+		<c:if test="${camping.mapX ne '' && camping.mapY ne '' }">
+		<div style="margin-top: 10px;">
+			<script type="text/javascript"
+				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94072c8aeb913ec7aeaec91f4cf80dc2"></script>
+			<script>
+			
+				let pos = new kakao.maps.LatLng(${camping.mapY}, ${camping.mapX});
+				
+				let container = document.querySelector('#map');
+				let options = {
+					center : pos, 
+					level : 4
+				};
+		
+				let map = new kakao.maps.Map(container, options);
+				
+				let marker = new kakao.maps.Marker({
+				    position: pos
+				});
+				
+				marker.setMap(map);
+				
+			</script>
+		</div>
+		</c:if>
 </body>
 </html>
