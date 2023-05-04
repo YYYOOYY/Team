@@ -49,6 +49,8 @@ public class BoardCreateTaskController extends HttpServlet {
 		String title = multi.getParameter("title");
 		String body = multi.getParameter("body");
 		String price = multi.getParameter("price");
+		String area = multi.getParameter("area");
+		String city = multi.getParameter("city");
 		// repper 를 이용해서 long 타입을 String 으로 변환(랜덤파일명)
 		String genCode = Long.toString(System.currentTimeMillis());
 		// 새로운 파일생성(절대경로, 바꿀이름)
@@ -67,6 +69,8 @@ public class BoardCreateTaskController extends HttpServlet {
 		params.put("body", body);
 		params.put("price", price);
 		params.put("writer", writer);
+		params.put("area", area);
+		params.put("city", city);
 
 		int r = sqlSession.insert("boards.create", params);
 		sqlSession.close();

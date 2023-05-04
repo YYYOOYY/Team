@@ -7,8 +7,8 @@
 		SELECT * FROM BOARDS ORDER BY WRITED DESC
 	</select>
 	<insert id="create" parameterType="hashMap">
-		INSERT INTO BOARDS (CODE, WRITER, TITLE, BODY, PRICE, IMG)
-		VALUES (BOARDS_SEQ.NEXTVAL, #{writer}, #{title}, #{body}, #{price}, #{img} )
+		INSERT INTO BOARDS (CODE, WRITER, TITLE, BODY, PRICE, IMG, AREA, CITY)
+		VALUES (BOARDS_SEQ.NEXTVAL, #{writer}, #{title}, #{body}, #{price}, #{img}, #{area}, #{city} )
 	</insert>
 	<select id="findByBoardCode" resultType="data.board.Board" parameterType="string">
 		SELECT * FROM BOARDS WHERE CODE= #{code}
