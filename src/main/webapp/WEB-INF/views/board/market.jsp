@@ -6,6 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>캠핑용품 중고거래</title>
+<link rel="stylesheet" href="/resource/css/style.css">
+
+<!-- google font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+	rel="stylesheet">
 <style>
 *{
 padding: 1px;
@@ -29,7 +37,7 @@ padding: 1px;
 						document.querySelector("#logon").onclick = function(evt) {
 							var returnValue = confirm('로그인이 필요합니다.');
 							if(returnValue) {
-								location.href='/login'
+								document.querySelector(".login_ad").dispatchEvent(new Event("click"));
 							}
 						}
 					</script>
@@ -50,5 +58,8 @@ padding: 1px;
 		</div>
 		<span style="font-size: 12px">조회 ${boards.viewCount } · 관심 ${boards.interestedCount }</span>
 	</c:forEach>
+		<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="/resource/js/custom.js"></script>
 </body>
 </html>
