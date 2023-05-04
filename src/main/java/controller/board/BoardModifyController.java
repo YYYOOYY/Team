@@ -19,9 +19,17 @@ public class BoardModifyController extends HttpServlet {
 		HttpSession session = req.getSession();
 		
 		User user = (User)session.getAttribute("logonUser");
-		String writer= req.getParameter("writer");
+		String writer = req.getParameter("writer");
+		String title = req.getParameter("title");
+		String body = req.getParameter("body");
+		String price = req.getParameter("price");
+		
+		req.setAttribute("title", title);
+		req.setAttribute("body", body);
+		req.setAttribute("price", price);
 		
 		if(user.getNick().equals(writer) ) {
+			
 			req.getRequestDispatcher("/WEB-INF/views/board/board-modify.jsp").forward(req, resp);			
 		} else {
 			req.getRequestDispatcher("/WEB-INF/views/board/board-detail.jsp").forward(req, resp);

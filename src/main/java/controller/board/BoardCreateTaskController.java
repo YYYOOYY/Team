@@ -33,9 +33,9 @@ public class BoardCreateTaskController extends HttpServlet {
 		SqlSession sqlSession = factory.openSession(true);
 
 		HttpSession session = req.getSession();
-		User user = (User)session.getAttribute("logonUser"); // 작성자
+		User user = (User) session.getAttribute("logonUser"); // 작성자
 		String writer = user.getNick();
-		
+
 		// ----------------------------------------------------------------------
 		ServletContext application = req.getServletContext();
 		String path = application.getRealPath("/resource/img/" + writer); // 웹 uri 를 작성
@@ -45,37 +45,47 @@ public class BoardCreateTaskController extends HttpServlet {
 		}
 		// 파일 생성이 되면 --> 실제로 돌아가는 서버에 생성이 되기 때문에 이클립스에서는 생성이 되지않는다.
 		MultipartRequest multi = new MultipartRequest(req, path, 1024 * 1024 * 20, "UTF-8"); // 3번째에 들어간 숫자는 파일의 최대 크기를
-																								// 의미
+		String price = multi.getParameter("price");
 		String title = multi.getParameter("title");
 		String body = multi.getParameter("body");
-		String price = multi.getParameter("price");
-		String area = multi.getParameter("area");
-		String city = multi.getParameter("city");
-		// repper 를 이용해서 long 타입을 String 으로 변환(랜덤파일명)
-		String genCode = Long.toString(System.currentTimeMillis());
-		// 새로운 파일생성(절대경로, 바꿀이름)
+		String area = multi.getParameter("search_02");
 
-		if(title.equals("") || body.equals("") || price.equals("") || multi.getFile("img") == null) {
-			resp.sendRedirect("/board/create");
-			return;
-		}
-		
-		String img = "/resource/img/" + writer + "/" + genCode;
-		multi.getFile("img").renameTo(new File(path, genCode));
-		
-		Map<String, Object> params = new HashMap<>();
-		params.put("title", title);
-		params.put("img", img);
-		params.put("body", body);
-		params.put("price", price);
-		params.put("writer", writer);
-		params.put("area", area);
-		params.put("city", city);
+		if (price.matches("[1-9][0-9]{1,6}00") && !title.equals("") && body.equals("")) {
 
-		int r = sqlSession.insert("boards.create", params);
-		sqlSession.close();
-		if (r == 1) {
-			resp.sendRedirect("/board/market");
+			if (area.equals("")) {
+				resp.sendRedirect("/board/create");
+				return; // 의미
+			}
+
+			String city = multi.getParameter("search_03");
+			// repper 를 이용해서 long 타입을 String 으로 변환(랜덤파일명)
+			String genCode = Long.toString(System.currentTimeMillis());
+			// 새로운 파일생성(절대경로, 바꿀이름)
+
+			if (title.equals("") || body.equals("") || price.equals("") || multi.getFile("img") == null) {
+				resp.sendRedirect("/board/create");
+				return;
+			}
+
+			String img = "/resource/img/" + writer + "/" + genCode;
+			multi.getFile("img").renameTo(new File(path, genCode));
+
+			Map<String, Object> params = new HashMap<>();
+			params.put("title", title);
+			params.put("img", img);
+			params.put("body", body);
+			params.put("price", price);
+			params.put("writer", writer);
+			params.put("area", area);
+			params.put("city", city);
+
+			int r = sqlSession.insert("boards.create", params);
+			sqlSession.close();
+			if (r == 1) {
+				resp.sendRedirect("/board/market");
+			}
+		}else {
+			resp.sendRedirect("/board/create?error=a");
 		}
 	}
 }

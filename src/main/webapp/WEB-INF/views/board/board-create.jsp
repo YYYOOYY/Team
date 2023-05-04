@@ -20,15 +20,19 @@
 </style>
 </head>
 <body>
+	<c:if test="${error eq 'a' }">
+		<span style="color: red">값 똑바로 넣어라</span>
+	</c:if>
 	<%--중고거래 게시판 물품 등록--%>
 	<h3>거래하고싶은 물품을 등록하세요</h3>
 	<form action="/board/create-task" method="post"
 		enctype="multipart/form-data">
+		원하는 거래 장소를 선택 하세요 :
 		<select id="area" name="search_02" class="col-2-1">
 			<!-- 지역별 검색 시작 -->
 			<%-- search_02, Class col-10 --%>
 			<option value="" selected>전체/도</option>
-			<c:forEach items="${cityList }" var="c">
+			<c:forEach items="${areaList }" var="c">
 				<option value="${c }" ${param.area eq c ? 'selected' : '' }>${c }</option>
 			</c:forEach>
 		</select>
@@ -107,7 +111,8 @@
 			</c:forEach>
 		</select>
 		<!-- 시/도 끝 -->
-
+		
+		<p style="color: red; font-size:12px;">(❗지역은 다시 설정할 수 없으니 신중히 선택해 주세요.)</p>
 		<div>
 			제목 : <input type="text" name="title" placeholder="제목을 입력하세요" /> <input
 				type="file" placeholder="파일선택" name="img" accept="image/*" />

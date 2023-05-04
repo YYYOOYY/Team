@@ -45,6 +45,8 @@ public class BoardModifyTaskController extends HttpServlet{
 			String body = req.getParameter("body");
 			String price = req.getParameter("price");
 			String img = req.getParameter("img");
+			String area = req.getParameter("area");
+			String city = req.getParameter("city");
 			
 			params.put("title", title);
 			params.put("body", body);

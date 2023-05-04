@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +18,7 @@
 <style>
 *{
 padding: 1px;
+color: white;
 }
 </style>
 </head>
@@ -28,11 +30,11 @@ padding: 1px;
 		<c:choose>
 			<c:when test="${sessionScope.logon }">
 				<form action="/board/create">
-				<button>게시글 쓰기</button>
+				<button style="background-color: black;">게시글 쓰기</button>
 				</form>
 			</c:when>
 			<c:otherwise>
-				<button id="logon">게시글 쓰기</button>
+				<button id="logon" style="background-color: black;">게시글 쓰기</button>
 					<script>
 						document.querySelector("#logon").onclick = function(evt) {
 							var returnValue = confirm('로그인이 필요합니다.');
@@ -51,7 +53,10 @@ padding: 1px;
 			</a>
 		</div>
 		<div>
-			${boards.title }
+			<span style="font-size:13px ">[${boards.area } / ${boards.city }]</span>${boards.title }
+		</div>
+		<div>
+			<p><span style="font-size: 12px"><fmt:formatDate value="${boards.writed }" pattern="yyyy.MM.dd"/></span>
 		</div>
 		<div>
 			<b>${boards.price }원</b>

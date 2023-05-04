@@ -19,18 +19,17 @@
 </head>
 <body>
 	<h3>게시글을 수정하세요.</h3>
-	<form action="/board/create-task" method="post" enctype="multipart/form-data">
+	<form action="/board/create-task" method="post">
 		<div>
 			제목 : 
-			<input type="text" name="title" placeholder="${detail.title }" />
-			<input type="file" placeholder="파일선택" name="img" />
+			<input type="text" name="title" value="${title }" />
 		</div>
 		<div>
-			<textarea  style="width: 45%; height: 120px; resize: none" name="body" placeholder="${detail.body }"></textarea>
+			<textarea  style="width: 45%; height: 120px; resize: none" name="body">${body }</textarea>
 		</div>
 		<div>
 			가격 :
-			<input type="text" name="price" placeholder="${detail.price }"/>
+			<input type="text" name="price" value="${price }"/>
 			<button type="submit">등록</button>
 		</div>
 	</form>
