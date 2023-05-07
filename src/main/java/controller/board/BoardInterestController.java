@@ -51,7 +51,7 @@ public class BoardInterestController extends HttpServlet {
 				param.put("count", countInterested);
 
 				int rr = sqlSession.update("boards.updateInterestCount", param);
-
+				sqlSession.close();
 				if (rr == 1) {
 					resp.sendRedirect("/board/detail?code=" + code);
 				}
@@ -66,12 +66,11 @@ public class BoardInterestController extends HttpServlet {
 				param.put("count", countInterested);
 
 				int rr = sqlSession.update("boards.updateInterestCount", param);
-				
+				sqlSession.close();
 				if(rr == 1) {
 					resp.sendRedirect("/board/detail?code=" + code);					
 				}
 			}
 		}
-		sqlSession.close();
 	}
 }
