@@ -24,5 +24,6 @@
 	<mappers>
 		<mapper resource="mybatis/mapper/boards-mapper.xml"/>
 		<mapper resource="mybatis/mapper/users-mapper.xml"/>
+		<mapper resource="mybatis/mapper/notice-mapper.xml"/>
 	</mappers>
 </configuration>
