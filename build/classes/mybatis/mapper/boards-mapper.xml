@@ -17,17 +17,25 @@
 		UPDATE BOARDS SET VIEW_COUNT = VIEW_COUNT + 1
 		WHERE CODE= #{code}
 	</update>
-	<update id="updateInterestCount" parameterType="string">
-		UPDATE BOARDS SET INTERESTED_COUNT = INTERESTED_COUNT + 1
+	
+	<update id="updateInterestCount" parameterType="hashmap">
+		UPDATE BOARDS SET INTERESTED_COUNT = #{count}
 		WHERE CODE= #{code}
 	</update>
-		<insert id="interest" parameterType="hashmap">
-		INSERT INTO INTERESTED 
-		VALUES (#{boardCode}, #{userId} )
-	</insert>
-	<select id="checkByInterested" resultType="data.interested.Interested" parameterType="hashmap">
-		SELECT * FROM INTERESTED WHERE BOARDS_CODE= #{boardsCode} AND USER_ID= #{userId}
+	<select id="countInterested" resultType="int" parameterType="string">
+		SELECT COUNT(*) FROM INTERESTED WHERE BOARD_CODE= #{code}
 	</select>
+	<insert id="createInterest" parameterType="hashmap">
+		INSERT INTO INTERESTED 
+		VALUES (#{boardCode}, #{userId})
+	</insert>
+	
+	<select id="checkByInterested" resultType="data.interested.Interested" parameterType="hashmap">
+		SELECT * FROM INTERESTED WHERE USER_ID= #{userId} AND BOARD_CODE= #{boardCode}
+	</select>
+	<delete id="deleteInterested" parameterType="hashmap">
+		DELETE FROM INTERESTED WHERE USER_ID= #{userId} AND BOARD_CODE= #{boardCode}
+	</delete>
 	<update id="modify" parameterType="hashmap">
 		UPDATE BOARDS SET TITLE= #{title}, BODY= #{body}, PRICE= #{price}, IMG= #{img} WHERE CODE= #{code}
 	</update>

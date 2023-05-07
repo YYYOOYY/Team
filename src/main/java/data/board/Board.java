@@ -23,8 +23,24 @@ public class Board {
 	int status;
 	// 물품사진
 	String img;
+	// 도
+	String area;
+	// 시/군
+	String city;
 	
 	
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
 	public String getImg() {
 		return img;
 	}
