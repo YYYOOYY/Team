@@ -11,7 +11,7 @@
 			<ul>
 				<li><a href="/search">캠핑장 검색</a></li>
 				<li><a href="/board/market">장비 중고나라</a></li>
-				<li><a href="#">캠핑 소식</a></li>
+				<li><a href="/notice/noticeBoard">캠핑 소식</a></li>
 			</ul>
 		</div>
 		<div class="login">
