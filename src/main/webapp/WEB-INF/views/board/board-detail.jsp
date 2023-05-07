@@ -30,7 +30,7 @@ padding: 1px;
 						<p>
 						<c:choose>
 							<c:when test="${heart }">
-								💗		
+								💗
 							</c:when>
 							<c:otherwise>
 								🤍					
