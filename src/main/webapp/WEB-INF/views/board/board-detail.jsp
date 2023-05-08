@@ -108,10 +108,31 @@ padding: 1px;
 				</c:otherwise>
 		</c:choose>
 	</div>
-	<%--중고거래 게시판 댓글 영역--%>
-	<div>
 	
-	
+		<hr/>
+	<%--중고거래 게시판 댓글쓰기 영역--%>
+	<div style="padding: 7px;">
+		<c:choose>
+			<c:when test="${countComments eq null }">
+				댓글쓰기 (0개)
+			</c:when>
+			<c:otherwise>
+				댓글쓰기 (${countComments }개)
+			</c:otherwise>
+		</c:choose>
+		<form action="/board/comment-task?code=${code }" method="post">
+		<div>
+			<textarea name="body" style="resize: none; width: 95%; height: 60px; padding: 10px; " placeholder="상품과 무관한 댓글이나 악플은 경고조치 없이 삭제되며 징계 대상이 될 수 있습니다."></textarea>
+			<button type="submit" style="float: right; height: 80px;">등록</button>		
+		</div>
+		</form>
+		<%--댓글 뷰 영역--%>
+		<div>
+			<c:forEach items="${list }" var="comments">
+			<p>${comments.writer } |
+			${comments.body } | <fmt:formatDate value="${detail.writed }" pattern="yyyy.MM.dd"/></p>			
+			</c:forEach> 
+		</div>
 	</div>
 </body>
 </html>

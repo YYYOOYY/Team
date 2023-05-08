@@ -34,7 +34,6 @@ public class BoardController extends HttpServlet{
 		List<Board> boardsAll = sqlSession.selectList("boards.findByBoardsAll");
 		req.setAttribute("boardsAll", boardsAll);
 		sqlSession.close();
-		System.out.println(boardsAll);
 		req.getRequestDispatcher("/WEB-INF/views/board/market.jsp").forward(req, resp);
 	}
 }

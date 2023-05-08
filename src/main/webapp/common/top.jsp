@@ -5,7 +5,8 @@
 <div class="header">
 	<div class="section">
 		<div class="logo">
-			<img src="/resource/img/logo_01.png" alt="캠핑어때 logo" onclick="location.href='/index'" />
+			<img src="/resource/img/logo_01.png" alt="캠핑어때 logo"
+				onclick="location.href='/index'" />
 		</div>
 		<div class="nav">
 			<ul>
@@ -21,7 +22,7 @@
 						<li class="login_ad"><a href="/logout">로그아웃</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="login_ad" >로그인</li>
+						<li class="login_ad">로그인</li>
 						<li>|</li>
 						<li class="join_ad">회원가입</li>
 					</c:otherwise>
@@ -37,6 +38,7 @@
 		<h4 class="layer_h4">Login</h4>
 		<div class="layer_login">
 			<form action="/user/login-task" method="post" autocomplete='off'>
+				<input type="hidden" name="code" value="${param.code }" />
 				<div class="login-input">
 					<input type="text" placeholder="ID" name="id" class="col-10"
 						required />

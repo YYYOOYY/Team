@@ -6,7 +6,7 @@
 	<select id="findByBoardsAll" resultType="data.board.Board" >  
 		SELECT * FROM BOARDS ORDER BY WRITED DESC
 	</select>
-	<insert id="create" parameterType="hashMap">
+	<insert id="create" parameterType="hashmap">
 		INSERT INTO BOARDS (CODE, WRITER, TITLE, BODY, PRICE, IMG, AREA, CITY)
 		VALUES (BOARDS_SEQ.NEXTVAL, #{writer}, #{title}, #{body}, #{price}, #{img}, #{area}, #{city} )
 	</insert>
@@ -42,4 +42,7 @@
 	<delete id="delete">
 		DELETE FROM BOARDS WHERE CODE= #{code}
 	</delete>
+	<select id="searchs">
+		SELECT * FROM BOARDS WHERE TITLE LIKE= '%'||#{search}||'%'
+	</select>
 </mapper>

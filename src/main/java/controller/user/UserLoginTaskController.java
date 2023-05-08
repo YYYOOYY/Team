@@ -37,16 +37,20 @@ public class UserLoginTaskController extends HttpServlet {
 			session.setAttribute("logon", true);
 			session.setAttribute("logonUser", found);
 
-			int r = (int)session.getAttribute("cate");
-			if (r == 1) {
-				resp.sendRedirect("/search");
-			} else if (r == 2) {
-				resp.sendRedirect("/board/market");
-			} else if (r == 3) {
-				resp.sendRedirect("/board/detail?code=" + code);
-			
-			} else {
+			if (session.getAttribute("cate") == null) {
 				resp.sendRedirect("/index");
+			} else {
+
+				int r = (int) session.getAttribute("cate");
+				if (r == 1) {
+					resp.sendRedirect("/search");
+				} else if (r == 2) {
+					resp.sendRedirect("/board/market");
+				} else if (r == 3) {
+					resp.sendRedirect("/board/detail?code=" + code);
+				} else {
+					resp.sendRedirect("/index");
+				}
 			}
 			return;
 		} else {
