@@ -20,6 +20,6 @@ public class BoardSearchController extends HttpServlet {
 
 		String search = req.getParameter("search");
 		
-		System.out.println(search);
+
 	}
 }
