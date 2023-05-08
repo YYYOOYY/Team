@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comments">
+	<insert id="create" parameterType="hashmap">
+		INSERT INTO COMMENTS (CODE, BOARD_CODE, WRITER, BODY) 
+		VALUES (COMMENTS_SEQ.NEXTVAL, #{boardCode}, #{writer}, #{body} )
+	</insert>
+	<select id="findByComments" resultType="data.comment.Comments">
+		SELECT * FROM COMMENTS WHERE BOARD_CODE = #{boardCode}
+	</select>
+	<select id="countComments" resultType="data.comment.Comments">
+		SELECT COUNT(*) FROM COMMENTS WHERE BOARD_CODE= #{boardCode}
+	</select>
+</mapper>

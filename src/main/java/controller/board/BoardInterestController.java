@@ -29,10 +29,23 @@ public class BoardInterestController extends HttpServlet {
 		SqlSession sqlSession = factory.openSession(true);
 
 		HttpSession session = req.getSession();
+
+		String code = req.getParameter("code");
+
+		boolean logon = (boolean)session.getAttribute("logon");
+		if(!logon) {
+			resp.sendRedirect("/board/market");
+			return;
+		}
+
 		User user = (User) session.getAttribute("logonUser");
 
+		if(user == null) {
+			resp.sendRedirect("/board/detail?error=r&code="+code);
+			return;
+		}
+
 		String userId = user.getId();
-		String code = req.getParameter("code");
 		
 		Map<String, Object> params = new HashMap<>();
 		params.put("boardCode", code);
