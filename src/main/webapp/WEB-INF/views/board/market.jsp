@@ -30,7 +30,13 @@ color: white;
 		<c:choose>
 			<c:when test="${sessionScope.logon }">
 				<form action="/board/create">
-				<button style="background-color: black;">게시글 쓰기</button>
+					<button style="background-color: black;">게시글 쓰기</button>
+				</form>
+				<form action="/board/search">
+					<div style="float: center;">
+						<input type="text" placeholder="검색" name="search" style="height: 30px; width: 30%;"/>
+						<button type="submit">검색하기</button>
+					</div>
 				</form>
 			</c:when>
 			<c:otherwise>
@@ -43,9 +49,15 @@ color: white;
 							}
 						}
 					</script>
+					<form action="/board/search">
+						<div style="float: center;">
+							<input type="text" placeholder="검색" name="search" style="height: 30px; width: 30%;"/>
+						</div>
+					</form>		
 			</c:otherwise>
 		</c:choose>
 	</div>
+	<div style="padding: 30px;">
 	<c:forEach var="boards" items="${boardsAll }">
 		<div>
 			<a href="/board/detail?code=${boards.code }">
@@ -66,5 +78,6 @@ color: white;
 		<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="/resource/js/custom.js"></script>
+	</div>
 </body>
 </html>

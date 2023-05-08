@@ -37,6 +37,7 @@
 		<h4 class="layer_h4">Login</h4>
 		<div class="layer_login">
 			<form action="/user/login-task" method="post" autocomplete='off'>
+				<input type="hidden" name="code" value="${param.code }"/>
 				<div class="login-input">
 					<input type="text" placeholder="ID" name="id" class="col-10"
 						required />

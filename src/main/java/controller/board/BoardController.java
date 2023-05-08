@@ -26,6 +26,10 @@ public class BoardController extends HttpServlet{
 		HttpSession session = req.getSession();
 		session.setAttribute("cate", 2);
 		
+		String error = req.getParameter("error");
+		
+		req.setAttribute("error", error);
+		
 		SqlSessionFactory factory =
 				(SqlSessionFactory)req.getServletContext().getAttribute("sqlSessionFactory");
 		SqlSession sqlSession = factory.openSession(true);
@@ -34,7 +38,7 @@ public class BoardController extends HttpServlet{
 		List<Board> boardsAll = sqlSession.selectList("boards.findByBoardsAll");
 		req.setAttribute("boardsAll", boardsAll);
 		sqlSession.close();
-		System.out.println(boardsAll);
+
 		req.getRequestDispatcher("/WEB-INF/views/board/market.jsp").forward(req, resp);
 	}
 }
