@@ -45,4 +45,13 @@
 	<select id="searchs">
 		SELECT * FROM BOARDS WHERE TITLE LIKE= '%'||#{search}||'%'
 	</select>
+	<update id="transactionOn" parameterType="string">
+		UPDATE BOARDS SET STATUS = '2' WHERE CODE = #{code}
+	</update>
+	<update id="transactionOff" parameterType="string">
+		UPDATE BOARDS SET STATUS = '1' WHERE CODE = #{code}
+	</update>
+	<select id="status" parameterType="string" resultType="string">
+		SELECT STATUS FROM BOARDS WHERE CODE = #{code}
+	</select>
 </mapper>

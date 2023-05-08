@@ -19,6 +19,7 @@ import data.board.Board;
 import data.comment.Comments;
 import data.interested.Interested;
 import data.user.User;
+import util.GoCampingAPI;
 
 @WebServlet("/board/detail")
 public class BoardDetailController extends HttpServlet {
@@ -30,6 +31,14 @@ public class BoardDetailController extends HttpServlet {
 		HttpSession session = req.getSession();
 		
 		session.setAttribute("cate", 3);
+		
+		int p;
+		if (req.getParameter("pageNo") == null) {
+			p = 1;
+		} else {
+			p = Integer.parseInt(req.getParameter("pageNo"));
+		}
+		
 		String code = req.getParameter("code");
 		User user = (User) session.getAttribute("logonUser");
 		String userId = null;
@@ -56,10 +65,38 @@ public class BoardDetailController extends HttpServlet {
 			}
 			
 			List<Comments> list = sqlSession.selectList("comments.findByComments", code);
-			req.setAttribute("list", list);
+			
+			String pageNo = req.getParameter("pageNo");
+			
+			int page = pageNo == null ? 1 : Integer.parseInt(pageNo);
+			
+			int from = (page - 1) * 10;
+			int to = page == (list.size() / 10 + 1) ? from + (list.size() % 10) : page * 10;
+			
+			req.setAttribute("list", list.subList(from, to));
 			req.setAttribute("countComments", list.size());
 			
 			sqlSession.close();
+			
+			
+			int total = list.size();
+			int lastPage = total / 10 + (total % 10 > 0 ? 1 : 0);
+
+			int start = p % 10 == 0 ? p - 9 : p - (p % 10) + 1;
+			int last = p % 10 == 0 ? p : p - (p % 10) + 10;
+
+			last = last > lastPage ? lastPage : last;
+
+			req.setAttribute("start", start);
+			req.setAttribute("last", last);
+			req.setAttribute("lastPage", lastPage);
+
+			boolean existPrev = start == 1 ? false : true;
+			boolean existNext = last < lastPage - 1 ? true : false;
+
+			req.setAttribute("existPrev", existPrev);
+			req.setAttribute("existNext", existNext);
+			
 			req.getRequestDispatcher("/WEB-INF/views/board/board-detail.jsp").forward(req, resp);
 		}else {	
 			Board detailBoard = sqlSession.selectOne("boards.findByBoardCode", code);
@@ -67,14 +104,40 @@ public class BoardDetailController extends HttpServlet {
 			List<Comments> list = sqlSession.selectList("comments.findByComments", code);
 			Comments comments = sqlSession.selectOne("comments.countComments", code);
 			
+			String pageNo = req.getParameter("pageNo");
+			
+			int page = pageNo == null ? 1 : Integer.parseInt(pageNo);
+			
+			int from = (page - 1) * 10;
+			int to = page == (list.size() / 10 + 1) ? from + (list.size() % 10) : page * 10;
+			
+			
 			req.setAttribute("detail", detailBoard);
 			req.setAttribute("code", code);
 			
-			req.setAttribute("list", list);
+			req.setAttribute("list", list.subList(from, to));
 			req.setAttribute("countComments", list.size());
 
 
 			sqlSession.close();
+			
+			int total = list.size();
+			int lastPage = total / 10 + (total % 10 > 0 ? 1 : 0);
+
+			int start = p % 10 == 0 ? p - 9 : p - (p % 10) + 1;
+			int last = p % 10 == 0 ? p : p - (p % 10) + 10;
+
+			last = last > lastPage ? lastPage : last;
+
+			req.setAttribute("start", start);
+			req.setAttribute("last", last);
+			req.setAttribute("lastPage", lastPage);
+
+			boolean existPrev = start == 1 ? false : true;
+			boolean existNext = last < lastPage - 1 ? true : false;
+
+			req.setAttribute("existPrev", existPrev);
+			req.setAttribute("existNext", existNext);
 			
 			req.getRequestDispatcher("/WEB-INF/views/board/board-detail.jsp").forward(req, resp);
 		}
