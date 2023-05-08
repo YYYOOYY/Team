@@ -20,7 +20,14 @@ padding: 1px;
 		<c:choose>
 				<c:when test="${sessionScope.logon }">
 					<div style="font-size: 20px;">
-						<span>[${detail.area } / ${detail.city }]</span>
+						<c:choose>
+							<c:when test="${detail.status eq '1' }">
+								<span>[${detail.area } / ${detail.city }]</span>
+							</c:when>
+							<c:otherwise>
+								<span>[거래완료]</span>
+							</c:otherwise>							
+						</c:choose>
 						${detail.title } <span style="font-size: 12px;">⁽작성자:${detail.writer }⁾</span>
 					</div>		
 					<div>
@@ -53,7 +60,25 @@ padding: 1px;
 					<div>
 					<div>	
 						<p><span style="font-size: 12px"><fmt:formatDate value="${detail.writed }" pattern="yyyy.MM.dd"/></span>
-					</div>	
+					</div>
+					<div id="transaction">
+						<c:choose>
+							<c:when test="${detail.status eq '1' }">
+								거래완료로 변경
+							</c:when>
+							<c:otherwise>							
+								거래중으로 변경
+							</c:otherwise>
+						</c:choose>
+					</div>
+						<script>
+							document.querySelector("#transaction").onclick = function(evt) {
+								var returnValue = confirm('거래상태를 바꾸시겠습니까?');
+								if(returnValue) {
+									location.href='/board/transaction?code=${param.code }'
+								}
+							}	
+						</script>
 						<c:choose>
 							<c:when test="${sessionScope.logonUser.getNick() ne detail.writer }">
 								<span id="logonModify" style="cursor: pointer; font-size : 13px;">수정</span> ·
@@ -94,7 +119,14 @@ padding: 1px;
 				<%--비로그인 시 보이는 중고거래 게시판 글(디테일)영역 --%>
 				<c:otherwise>
 					<div style="font-size: 20px;">
-						<span>[${detail.area } / ${detail.city }]</span>
+						<c:choose>
+							<c:when test="${detail.status eq '1' }">
+								<span>[${detail.area } / ${detail.city }]</span>
+							</c:when>
+							<c:otherwise>
+								<span>[거래완료]</span>
+							</c:otherwise>							
+						</c:choose>
 						${detail.title } <span style="font-size: 12px;">⁽작성자:${detail.writer }⁾</span>
 					</div>		
 					<div>
@@ -134,5 +166,67 @@ padding: 1px;
 			</c:forEach> 
 		</div>
 	</div>
+					<!-- 페이징 처리 시작-->
+			<div class="text-center pt15 pb10 ws15">
+				<c:set var="currentPage"
+					value="${empty param.pageNo ? 1 : param.pageNo }" />
+				<%--처음으로--%>
+				<c:if test="${currentPage >= 11}">
+					<c:url value="/board/detail" var="target">
+						<c:param name="code" value="${detail.code }"/>
+						<c:param name="pageNo" value="1" />
+					</c:url>
+					<a href="${target}" style="color: black;">&lt;&lt;</a>
+				</c:if>
+				<%----------%>
+				<%--이전버튼--%>
+				<c:if test="${existPrev }">
+					<c:url value="/board/detail" var="target">
+						<c:param name="code" value="${detail.code }"/>
+						<c:param name="pageNo" value="${start-1 }" />
+					</c:url>
+					<a href="${target}" style="color: black;">&lt;</a>
+				</c:if>
+				<%----------%>
+				<%--현재 누른 페이지--%>
+				<c:forEach var="p" begin="${start }" end="${last }">
+					<c:url value="/board/detail" var="target">
+						<c:param name="code" value="${detail.code }"/>
+						<c:param name="pageNo" value="${p }" />
+					</c:url>
+					<c:choose>
+						<c:when test="${p eq currentPage }">
+							<b style="color: orange;">${p }</b>
+						</c:when>
+						<c:otherwise>
+							<a href="${target }" style="color: black;">${p }</a>
+						</c:otherwise>
+					</c:choose>
+					<%----------------%>
+				</c:forEach>
+				<%--다음버튼 --%>
+				<c:if test="${existNext }">
+					<c:url value="/board/detail" var="target">
+						<c:param name="code" value="${detail.code }"/>
+						<c:param name="pageNo" value="${last + 1 }" />
+					</c:url>
+					<a href="${target }" style="color: black;">&gt;</a>
+				</c:if>
+				<%----------%>
+				<%--마지막으로--%>
+				<c:if test="${param.pageNo <= lastPage - lastPage % 10}">
+					<c:url value="/board/detail" var="target">
+						<c:param name="code" value="${detail.code }"/>
+						<c:param name="pageNo" value="${lastPage }" />
+					</c:url>
+					<a href="${target}" style="color: black;">&gt;&gt;</a>
+				</c:if>
+				<%----------%>
+				<!-- 페이징처리 끝 -->
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="/resource/js/custom.js"></script>
+	</div>
+	
 </body>
 </html>
