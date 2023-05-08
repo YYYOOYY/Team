@@ -8,7 +8,7 @@
 <title>ķ�ξ?!</title>
 
 <!-- style -->
-<link rel="stylesheet" href="/resource/css/style.css">
+<link rel="stylesheet" href="/resource/css/style.css?<%=System.currentTimeMillis()%>">
 
 <!-- google font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">

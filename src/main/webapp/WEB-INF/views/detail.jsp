@@ -5,12 +5,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>캠핑어때?!</title>
+
+<!-- fontawesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- style -->
+<link rel="stylesheet" href="/resource/css/style.css?<%=System.currentTimeMillis()%>">
+
+<!-- google font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+	rel="stylesheet">
+
 </head>
 <body>
+<%@ include file="/common/top.jsp" %>
 	<%-- 고캠핑기준 맨위 --%>
-	<div style="border: 1px solid black"> 
-		<div>${camping.facltNm }</div>
+	<div class="search_detail_top"> 
+		<div class="pt15 pb10">${camping.facltNm }</div>
 		<div>${camping.lineIntro }</div>
 		<c:if test="${camping.themaEnvrnCl != '' }">
 			<div>태그 : 
@@ -269,5 +284,9 @@
 			</script>
 		</div>
 		</c:if>
+		
+	<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="/resource/js/custom.js"></script>
 </body>
 </html>
