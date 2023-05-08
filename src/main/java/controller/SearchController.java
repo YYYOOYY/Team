@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import data.camping.CampingItem;
+import data.camping.SbrsClItem;
 import util.GoCampingAPI;
+import util.change.ChangeImg;
 
 @WebServlet("/search")
 public class SearchController extends HttpServlet {
@@ -38,8 +40,16 @@ public class SearchController extends HttpServlet {
 			List<CampingItem> campings = GoCampingAPI.search(pageNo);
 			
 			if (campings != null) {
+				
+				for(CampingItem i : campings) {
+					String str = i.getSbrsCl();
+					List<SbrsClItem> li =ChangeImg.create(str);
+					i.setSbrsClItems(li);
+				}
+				
 				req.setAttribute("camping", campings);
 				req.setAttribute("total", GoCampingAPI.cache.size());
+				
 			}
 			
 			int total = GoCampingAPI.cache.size();
