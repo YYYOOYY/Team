@@ -25,6 +25,7 @@ public class NoticeModifyTaskController extends HttpServlet{
 			return;
 		}
 		
+		
 		int r = NoticeDAO.modifyNotice(title, body, code, secret);
 		if(r == 1) {
 			resp.sendRedirect("/notice/noticeDetail?code=" + code);
