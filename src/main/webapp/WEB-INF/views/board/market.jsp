@@ -58,10 +58,10 @@ li {
 					</form>
 				</div>
 				<div style="text-align: left;">
-					<form action="/board/search">
+					<form action="/board/market">
 						<div style="float: center;">
 							<input type="text" placeholder="검색" name="search"
-								style="    height: 31px; width: 96%;" autocomplete="pff"/>
+								style="    height: 31px; width: 96%;" autocomplete="off"/>
 						</div>
 				</form>
 				</div>
@@ -83,7 +83,7 @@ li {
 					</script>
 				</div>
 				<div style="text-align: left;">
-				<form action="/board/search">
+				<form action="/board/market">
 					<div style="float: center;">
 						<input type="text" placeholder="검색" name="search"
 							style="height: 31px; width: 96%;" autocomplete="off"/>
