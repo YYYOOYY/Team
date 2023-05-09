@@ -24,8 +24,8 @@
 <body>
 <%@ include file="/common/top.jsp" %>
 	<%-- 고캠핑기준 맨위 --%>
-	<div class="search_detail_top"> 
-		<div class="pt15 pb10">${camping.facltNm }</div>
+	<div class="search_detail_top" style="background-color: #9AA5FC; color: #fff"> 
+		<div class="pb10"><h1 style="font-size: 2rem;">${camping.facltNm }</h1></div>
 		<div>${camping.lineIntro }</div>
 		<c:if test="${camping.themaEnvrnCl != '' }">
 			<div>태그 : 
@@ -37,9 +37,9 @@
 	</div>
 	
 	<%-- 고캠핑기준 사진, 메인정보들 --%>
-	<div style="border: 1px solid black; display: flex;"> 
+	<div class="search_detail_top" style="border-bottom: 1px solid #DADADA; display: flex; background: #fff"> 
 		<%-- 사진 --%>
-		<div style="flex: 5.5">
+		<div style="flex: inherit; width: 55%">
 			<c:choose>
 				<c:when test="${empty camping.firstImageUrl }">
 					<img src="/resource/img/logo_01.png"  width="600px" height="500px"/>
@@ -50,26 +50,67 @@
 			</c:choose>
 		</div>
 		<%-- 메인정보 --%>
-		<div style="flex: 4.5">
-			<div>주소 : ${camping.addr1 } ${camping.addr2 }</div>
-			<div>문의처 : ${camping.tel }</div>
-			<div>캠핑장 환경 : ${camping.lctCl } / ${camping.facltDivNm }</div>
-			<div>캠핑장 유형 : ${camping.induty }</div>
-			<c:if test="${camping.operPdCl != '' || camping.operDeCl != '' }">
-				<div>운영기간 : ${camping.operPdCl } [${camping.operDeCl }]</div>
-			</c:if>
-			<div>홈페이지 : <a href="${camping.homepage }">홈페이지 바로가기</a></div>
-			<c:if test="${camping.resveCl != '' }">
-				<div>예약방법 : ${camping.resveCl }</div>
-			</c:if>
-			<c:if test="${camping.posblFcltyCl != '' }">
-				<div>주변이용가능시설 : ${camping.posblFcltyCl }</div>
-			</c:if>
-		</div>
+		<div class="table_wrap">
+			<table class="sdt">
+			<tbody>
+			<tr>
+				<td><b>주소</b></td>
+				<td>${camping.addr1 } ${camping.addr2 }</td>
+			</tr>
+			<tr>
+				<td><b>문의처</b></td>
+				<td>${camping.tel }</td>
+			</tr>
+			<tr>
+				<td><b>캠핑장 환경</b></td>
+				<td>${camping.lctCl } / ${camping.facltDivNm }</td>
+			</tr>
+			<tr>
+				<td><b>캠핑장 유형</b></td>
+				<td>${camping.induty }</td>
+			</tr>
+			<tr>
+				<td><b>운영기간</b></td>
+				<td><c:if test="${camping.operPdCl != '' || camping.operDeCl != '' }">${camping.operPdCl } [${camping.operDeCl }]</c:if></td>
+			</tr>
+			<tr>
+				<td><b>홈페이지</b></td>
+				<td><a href="${camping.homepage }">홈페이지 바로가기</a></td>
+			</tr>
+			<tr>
+				<td><b>예약방법</b></td>
+				<td><c:if test="${camping.resveCl != '' }">${camping.resveCl }</c:if></td>
+			</tr>
+			<tr>
+				<td><b>주변이용가능시설</b></td>
+				<td><c:if test="${camping.posblFcltyCl != '' }">${camping.posblFcltyCl }</c:if></td>
+			</tr>
+			<tbody>
+	</table>
 	</div>
 	
+<%-- 		<div style="flex: 4.5">
+			<div style="margin-bottom: 5px;"><b>주소 :</b> ${camping.addr1 } ${camping.addr2 }</div>
+			<div style="margin-bottom: 5px;"><b>문의처 :</b> ${camping.tel }</div>
+			<div style="margin-bottom: 5px;"><b>캠핑장 환경 :</b> ${camping.lctCl } / ${camping.facltDivNm }</div>
+			<div style="margin-bottom: 5px;"><b>캠핑장 유형 :</b> ${camping.induty }</div>
+			<c:if test="${camping.operPdCl != '' || camping.operDeCl != '' }">
+				<div style="margin-bottom: 5px;"><b>운영기간 :</b> ${camping.operPdCl } [${camping.operDeCl }]</div>
+			</c:if>
+			<div style="margin-bottom: 5px;"><b>홈페이지 :</b> <a href="${camping.homepage }">홈페이지 바로가기</a></div>
+			<c:if test="${camping.resveCl != '' }">
+				<div style="margin-bottom: 5px;"><b>예약방법 :</b> ${camping.resveCl }</div>
+			</c:if>
+			<c:if test="${camping.posblFcltyCl != '' }">
+				<div style="margin-bottom: 5px;"><b>주변이용가능시설 :</b> ${camping.posblFcltyCl }</div>
+			</c:if>
+		</div>
+		 --%>
+	</div>
+	
+	
 	<%-- 고캠핑기준 사진3개와 캠핑장 설명 --%>
-	<div style="border: 1px solid black; display: flex; flex-direction: column;">
+	<div class="search_detail_top" style="border-bottom: 1px solid #DADADA; display: flex; flex-direction: column; background: #fff">
 		<%-- 사진3개 --%>
 		<div style="flex: 6">
 			<c:choose>
@@ -98,13 +139,13 @@
 			</c:choose>
 		</div>
 		<%-- 캠핑장 설명 --%>
-		<div style="flex: 4">
+		<div style="flex: 4; margin-top: 10px;">
 			${camping.intro }
 		</div>
 	</div>
 	
 	<%-- 고캠핑기준 기타 주요시설 --%>
-	<div style="border: 1px solid black;">
+	<div class="search_detail_top" style="border-bottom: 1px solid #DADADA; background: #fff">
 		<c:if test="${camping.gnrlSiteCo >= 1 || camping.autoSiteCo >= 1 || camping.glampSiteCo >= 1 || camping.caravSiteCo >= 1 || camping.indvdlCaravSiteCo >= 1 }">
 			<div>주요시설 :
 				<c:choose>
@@ -249,13 +290,13 @@
 		</c:if>
 	</div>
 	<%-- 고캠핑기준 사진들 --%>
-	<div style="border: 1px solid black;">
+	<div class="search_detail_top" style="border-bottom: 1px solid #DADADA; background: #fff">
 		<c:forEach items="${images }" var="i">
 			<img src="${i }" width="150px" height="120px" onerror="this.style='display: none'"/>
 		</c:forEach>
 	</div>
 	
-	<div id="map" style="width: 400px; height: 300px; max-width: 400px; border: 1px solid black;">-</div>
+	<div id="map" style="width: 100%; height: 500px; border-bottom: 1px solid #DADADA;">-</div>
 		<c:if test="${camping.mapX eq '' || camping.mapY eq '' }">
 			위치가 정확하지 않아 지도를 불러오지 못했습니다.
 		</c:if>

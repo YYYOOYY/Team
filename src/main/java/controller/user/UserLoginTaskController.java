@@ -40,7 +40,6 @@ public class UserLoginTaskController extends HttpServlet {
 			if (session.getAttribute("cate") == null) {
 				resp.sendRedirect("/index");
 			} else {
-
 				int r = (int) session.getAttribute("cate");
 				if (r == 1) {
 					resp.sendRedirect("/search");
@@ -56,7 +55,24 @@ public class UserLoginTaskController extends HttpServlet {
 			}
 			return;
 		} else {
-			resp.sendRedirect("/login?cause=error");
+			HttpSession session = req.getSession();
+
+			if (session.getAttribute("cate") == null) {
+				resp.sendRedirect("/index?unauthorized");
+			} else {
+				int r = (int) session.getAttribute("cate");
+				if (r == 1) {
+					resp.sendRedirect("/search?unauthorized");
+				} else if (r == 2) {
+					resp.sendRedirect("/board/market?unauthorized");
+				} else if (r == 3) {
+					resp.sendRedirect("/board/detail?unauthorized");
+				} else if (r == 4) {
+					resp.sendRedirect("/notice/noticeBoard?unauthorized");
+				} else {
+					resp.sendRedirect("/index?unauthorized");
+				}
+			}
 			return;
 		}
 	}

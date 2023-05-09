@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -35,13 +36,63 @@ public class UserJoinTaskController extends HttpServlet {
 			params.put("id", id);
 			params.put("pass", hashpw);
 			params.put("nick", nick);
-			sqlSession.selectList("users.create", params);
-			
-			req.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(req, resp);
+			int e = sqlSession.insert("users.create", params);
+			if(e == 1) {
+				HttpSession session = req.getSession();
+
+				if (session.getAttribute("cate") == null) {
+					resp.sendRedirect("/index");
+				} else {
+					int r = (int) session.getAttribute("cate");
+					if (r == 1) {
+						resp.sendRedirect("/search");
+					} else if (r == 2 || r == 3) {
+						resp.sendRedirect("/board/market");
+					} else if (r == 4) {
+						resp.sendRedirect("/notice/noticeBoard");
+					} else {
+						resp.sendRedirect("/index");
+					}
+				}				
+			} else {
+				HttpSession session = req.getSession();
+
+				if (session.getAttribute("cate") == null) {
+					resp.sendRedirect("/index?fail");
+				} else {
+					int r = (int) session.getAttribute("cate");
+					if (r == 1) {
+						resp.sendRedirect("/search?fail");
+					} else if (r == 2) {
+						resp.sendRedirect("/board/market?fail");
+					} else if (r == 3) {
+						resp.sendRedirect("/board/detail?fail");
+					} else if (r == 4) {
+						resp.sendRedirect("/notice/noticeBoard?fail");
+					} else {
+						resp.sendRedirect("/index?fail");
+					}
+				}
+			}
 		} else {
-			req.getRequestDispatcher("/WEB-INF/views/user/join.jsp").forward(req, resp);
-		}
-		
-		
+			HttpSession session = req.getSession();
+
+			if (session.getAttribute("cate") == null) {
+				resp.sendRedirect("/index?error");
+			} else {
+				int r = (int) session.getAttribute("cate");
+				if (r == 1) {
+					resp.sendRedirect("/search?error");
+				} else if (r == 2) {
+					resp.sendRedirect("/board/market?error");
+				} else if (r == 3) {
+					resp.sendRedirect("/board/detail?error");
+				} else if (r == 4) {
+					resp.sendRedirect("/notice/noticeBoard?error");
+				} else {
+					resp.sendRedirect("/index?error");
+				}
+			}
+		}		
 	}
 }

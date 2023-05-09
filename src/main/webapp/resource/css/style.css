@@ -68,7 +68,6 @@ body {
 .logo img {
 	width: 80px;
 	/* flex: 1; */
-	padding: 0 0 0 30px;
 	line-height: 2.75;
 }
 
@@ -134,7 +133,7 @@ body {
 	justify-content: center;
 	align-items: stretch;
 	width: 500px;
-	height: 400px;
+	height: 550px;
 	background: #fff;
 	border: 2px solid #000;
 	position: absolute;
@@ -450,19 +449,58 @@ body {
 
 .board_txt .txt_box {
 	background: #fff;
-	
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	flex-wrap: wrap;
 	justify-content: flex-start;
+	text-align: center;
+}
+
+.txt_box .iz {
+	width: 20%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	margin: 10px 0;
+	
+}
+
+.txt_box .iz26 {
+	width: 100%;
+}
+
+.txt_box .iz26 img {
+	width: 20%;
 }
 
 /* search detail */
 .search_detail_top {
-	border: 1px solid black;
+	border-bottom: 1px solid #DADADA;
 	background: #fff;
-	padding: 15px 30px;
+	padding: 30px;
+}
+
+.table_wrap {
+	width: 46%;
+}
+
+.sdt {
+	width:100%;
+	border-top: 1px solid #DADADA;
+	border-bottom: 1px solid #DADADA;
+	border-collapse:collapse;
+	padding:10px;
+}
+.sdt th {
+	border-bottom:1px solid #DADADA;
+	padding:10px;
+	background:#FFFFFF;
+}
+.sdt td {
+	border-bottom:1px solid #DADADA;
+	padding:10px;
 }
 
 /*ÀüÃ¼*/
@@ -514,14 +552,9 @@ body {
 	padding-bottom: 20px;
 }
 
-.iz {
-	width: 20%;
-	max-height: 100px;
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
+.fz13 {
+	font-size: 13px;
 }
-
 
 input[name=search_01], [name=search_02], select, option {
 	padding: 18px 10px;

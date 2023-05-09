@@ -1,7 +1,9 @@
 package controller.board;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,9 +37,12 @@ public class BoardController extends HttpServlet{
 		
 		List<Board> boardsAll = null;
 		
+		if(search == null || search.equals("")) {
+			boardsAll = sqlSession.selectList("boards.findByBoardsAll");
+		}else {
+			boardsAll = sqlSession.selectList("boards.search", search);
+		}
 		
-		
-		sqlSession.selectList("boards.findByBoardsAll");
 		
 		// 공지사항 -----
 		Notice notice = sqlSession.selectOne("notice.findByNotice", "81");
@@ -53,7 +58,7 @@ public class BoardController extends HttpServlet{
 		}
 		
 		int total = boardsAll.size();
-		int lastPage = total / 12 + (total % 12 > 0 ? 1 : 0);
+		int lastPage = total / 10 + (total % 10 > 0 ? 1 : 0);
 
 		int start = p % 10 == 0 ? p - 9 : p - (p % 10) + 1;
 		int last = p % 10 == 0 ? p : p - (p % 10) + 10;
@@ -75,8 +80,8 @@ public class BoardController extends HttpServlet{
 		
 		int page = pageNo == null ? 1 : Integer.parseInt(pageNo);
 		
-		int from = (page - 1) * 12;
-		int to = page == (boardsAll.size() / 12 + 1) ? from + (boardsAll.size() % 12) : page * 12;
+		int from = (page - 1) * 10;
+		int to = page == (boardsAll.size() / 10 + 1) ? from + (boardsAll.size() % 10) : page * 10;
 		
 		req.setAttribute("boardsAll", boardsAll.subList(from, to));
 		sqlSession.close();

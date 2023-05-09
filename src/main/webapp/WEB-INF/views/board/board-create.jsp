@@ -22,7 +22,6 @@
 <style>
 * {
 	box-sizing: border-box;
-	padding: 3px;
 }
 
 .msg {

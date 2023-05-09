@@ -24,6 +24,8 @@ import data.board.Board;
 public class BoardModifyTaskController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		
 		SqlSessionFactory factory =
 				(SqlSessionFactory)req.getServletContext().getAttribute("sqlSessionFactory");
 		SqlSession sqlSession = factory.openSession(true);
@@ -44,14 +46,10 @@ public class BoardModifyTaskController extends HttpServlet{
 			String title = req.getParameter("title");
 			String body = req.getParameter("body");
 			String price = req.getParameter("price");
-			String img = req.getParameter("img");
-			String area = req.getParameter("area");
-			String city = req.getParameter("city");
 			
 			params.put("title", title);
 			params.put("body", body);
 			params.put("price", price);
-			params.put("img", img);
 			params.put("code", code);
 			sqlSession.update("boards.modify", params);
 			
