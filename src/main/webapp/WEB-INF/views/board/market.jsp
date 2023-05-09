@@ -46,63 +46,73 @@ li {
 <body>
 	<%@ include file="/common/top.jsp"%>
 	<h3>캠핑용품을 캠핑어때에서 만나보세요</h3>
-	<div onclick="location.href='/notice/noticeDetail?code=81'" style="text-align:center; padding-bottom: 10px; font-size: 25px; cursor: pointer; width: 50%; margin: auto; color: white;">${notice.title }</div>
+	<div onclick="location.href='/notice/noticeDetail?code=81'"
+		style="text-align: center; padding-bottom: 10px; font-size: 25px; cursor: pointer; width: 50%; margin: auto; color: white;">${notice.title }</div>
 	<div style="padding: 10px; background-color: #fff;">
 		<div id="fail"></div>
 		<c:choose>
 			<c:when test="${sessionScope.logon }">
-			<div style="display: flex; justify-content: space-between; flex-direction: inherit;">
-				<div style="text-align: right;">
-					<form action="/board/create">
-						<button style="background-color: #FFFFFF; width: 230px; height: 31px;">게시글 쓰기</button>
-					</form>
-				</div>
-				<div style="text-align: left;">
-					<form action="/board/search">
-						<div style="float: center;">
-							<input type="text" placeholder="검색" name="search"
-								style="height: 31px; width: 96%;" autocomplete="off"/>
-						</div>
-				</form>
-				</div>
+				<div
+					style="display: flex; justify-content: space-between; flex-direction: inherit;">
+					<div style="text-align: right;">
+						<form action="/board/create">
+							<button
+								style="background-color: #FFFFFF; width: 230px; height: 31px;">게시글
+								쓰기</button>
+						</form>
+					</div>
+					<div style="text-align: left;">
+						<form action="/board/search">
+							<div style="float: center;">
+								<input type="text" placeholder="검색" name="search"
+									style="height: 31px; width: 96%;" autocomplete="off" />
+							</div>
+						</form>
+					</div>
 				</div>
 			</c:when>
-			
+
 			<c:otherwise>
-			<div style="display: flex; justify-content: space-between; flex-direction: inherit;">
-				<div style="text-align: right;">
-					<button id="logon" style="background-color: #FFFFFF; width: 230px; height: 31px;">게시글 쓰기</button>
-					<script>
-						document.querySelector("#logon").onclick = function(evt) {
-							var returnValue = confirm('로그인이 필요합니다.');
-							if (returnValue) {
-								document.querySelector(".login_ad").dispatchEvent(
-										new Event("click"));
+				<div
+					style="display: flex; justify-content: space-between; flex-direction: inherit;">
+					<div style="text-align: right;">
+						<button id="logon"
+							style="background-color: #FFFFFF; width: 230px; height: 31px;">게시글
+							쓰기</button>
+						<script>
+							document.querySelector("#logon").onclick = function(
+									evt) {
+								var returnValue = confirm('로그인이 필요합니다.');
+								if (returnValue) {
+									document.querySelector(".login_ad")
+											.dispatchEvent(new Event("click"));
+								}
 							}
-						}
-					</script>
-				</div>
-				<div style="text-align: left;">
-				<form action="/board/search">
-					<div style="float: center;">
-						<input type="text" placeholder="검색" name="search"
-							style="height: 31px; width: 96%;" />
+						</script>
 					</div>
-				</form>
+					<div style="text-align: left;">
+						<form action="/board/search">
+							<div style="float: center;">
+								<input type="text" placeholder="검색" name="search"
+									style="height: 31px; width: 96%;" />
+							</div>
+						</form>
+					</div>
 				</div>
-			</div>
 			</c:otherwise>
 		</c:choose>
-		<div style="display: flex; align-items: center; flex-direction: row; flex-wrap: wrap; display: flex; justify-content: flex-start;">
+		<div
+			style="display: flex; align-items: center; flex-direction: row; flex-wrap: wrap; display: flex; justify-content: flex-start;">
 			<c:forEach var="boards" items="${boardsAll }">
 				<div class="post">
 					<div>
-						<div style="height: 60% ;">
+						<div style="height: 60%;">
 							<a href="/board/detail?code=${boards.code }"> <img
-								src="${boards.img }" style="height: 100%;  width:100%; border-radius : 8px; object-fit :cover" />
+								src="${boards.img }"
+								style="height: 100%; width: 100%; border-radius: 8px; object-fit: cover" />
 							</a>
 						</div>
-						<div style="height: 40% ">
+						<div style="height: 40%">
 							<ul>
 								<c:choose>
 									<c:when test="${boards.status eq '1' }">
@@ -124,64 +134,63 @@ li {
 					</div>
 				</div>
 			</c:forEach>
-			</div>
 		</div>
-		<!-- 페이징 처리 시작-->
-		<div class="text-center pt15 pb10 ws15">
-			<c:set var="currentPage"
-				value="${empty param.pageNo ? 1 : param.pageNo }" />
-			<%--처음으로--%>
-			<c:if test="${currentPage >= 11}">
-				<c:url value="/board/market" var="target">
-					<c:param name="pageNo" value="1" />
-				</c:url>
-				<a href="${target}" style="color: black;">&lt;&lt;</a>
-			</c:if>
-			<%----------%>
-			<%--이전버튼--%>
-			<c:if test="${existPrev }">
-				<c:url value="/board/market" var="target">
-					<c:param name="pageNo" value="${start-1 }" />
-				</c:url>
-				<a href="${target}" style="color: black;">&lt;</a>
-			</c:if>
-			<%----------%>
-			<%--현재 누른 페이지--%>
-			<c:forEach var="p" begin="${start }" end="${last }">
-				<c:url value="/board/market" var="target">
-					<c:param name="pageNo" value="${p }" />
-				</c:url>
-				<c:choose>
-					<c:when test="${p eq currentPage }">
-						<b style="color: white;">${p }</b>
-					</c:when>
-					<c:otherwise>
-						<a href="${target }" style="color: white;">${p }</a>
-					</c:otherwise>
-				</c:choose>
-				<%----------------%>
-			</c:forEach>
-			<%--다음버튼 --%>
-			<c:if test="${existNext }">
-				<c:url value="/board/market" var="target">
-					<c:param name="pageNo" value="${last + 1 }" />
-				</c:url>
-				<a href="${target }" style="color: black;">&gt;</a>
-			</c:if>
-			<%----------%>
-			<%--마지막으로--%>
-			<c:if test="${param.pageNo <= lastPage - lastPage % 10}">
-				<c:url value="/board/market" var="target">
-					<c:param name="pageNo" value="${lastPage }" />
-				</c:url>
-				<a href="${target}" style="color: black;">&gt;&gt;</a>
-			</c:if>
-			<%----------%>
-			<!-- 페이징처리 끝 -->
-		</div>
-		<script
-			src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script src="/resource/js/custom.js"></script>
 	</div>
+	<!-- 페이징 처리 시작-->
+	<div class="text-center pt15 pb10 ws15">
+		<c:set var="currentPage"
+			value="${empty param.pageNo ? 1 : param.pageNo }" />
+		<%--처음으로--%>
+		<c:if test="${currentPage >= 11}">
+			<c:url value="/board/market" var="target">
+				<c:param name="pageNo" value="1" />
+			</c:url>
+			<a href="${target}" style="color: black;">&lt;&lt;</a>
+		</c:if>
+		<%----------%>
+		<%--이전버튼--%>
+		<c:if test="${existPrev }">
+			<c:url value="/board/market" var="target">
+				<c:param name="pageNo" value="${start-1 }" />
+			</c:url>
+			<a href="${target}" style="color: black;">&lt;</a>
+		</c:if>
+		<%----------%>
+		<%--현재 누른 페이지--%>
+		<c:forEach var="p" begin="${start }" end="${last }">
+			<c:url value="/board/market" var="target">
+				<c:param name="pageNo" value="${p }" />
+			</c:url>
+			<c:choose>
+				<c:when test="${p eq currentPage }">
+					<b style="color: white;">${p }</b>
+				</c:when>
+				<c:otherwise>
+					<a href="${target }" style="color: white;">${p }</a>
+				</c:otherwise>
+			</c:choose>
+			<%----------------%>
+		</c:forEach>
+		<%--다음버튼 --%>
+		<c:if test="${existNext }">
+			<c:url value="/board/market" var="target">
+				<c:param name="pageNo" value="${last + 1 }" />
+			</c:url>
+			<a href="${target }" style="color: black;">&gt;</a>
+		</c:if>
+		<%----------%>
+		<%--마지막으로--%>
+		<c:if test="${param.pageNo <= lastPage - lastPage % 10}">
+			<c:url value="/board/market" var="target">
+				<c:param name="pageNo" value="${lastPage }" />
+			</c:url>
+			<a href="${target}" style="color: black;">&gt;&gt;</a>
+		</c:if>
+		<%----------%>
+		<!-- 페이징처리 끝 -->
+	</div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="/resource/js/custom.js"></script>
 </body>
 </html>

@@ -20,24 +20,24 @@ public class UserJoinTaskController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
-		SqlSessionFactory factory =
-				(SqlSessionFactory)req.getServletContext().getAttribute("sqlSessionFactory");
+		SqlSessionFactory factory = (SqlSessionFactory) req.getServletContext().getAttribute("sqlSessionFactory");
 		SqlSession sqlSession = factory.openSession(true);
 		String id = req.getParameter("id");
 		String pass = req.getParameter("pass");
 		String nick = req.getParameter("nick");
 		String hashpw = "";
-		
+
 		// 비밀번호 암호화 (영어 + 숫자가 6글자 이상이 되도록)
 		// 아이디 (영어 + 숫자가 10글자 이하가 되도록)
-		if(id.matches("[a-z0-9]+")&&  id.length() <= 10 && pass.matches("[a-z0-9]+") && pass.length() >= 6 ) {
+		if (id.matches("[a-z0-9]+") && id.length() <= 10 && pass.matches("[a-z0-9]+") && pass.length() >= 6) {
 			hashpw = BCrypt.hashpw(pass, BCrypt.gensalt());
 			Map<String, Object> params = new HashMap<>();
 			params.put("id", id);
 			params.put("pass", hashpw);
 			params.put("nick", nick);
+
 			int e = sqlSession.insert("users.create", params);
-			if(e == 1) {
+			if (e == 1) {
 				HttpSession session = req.getSession();
 
 				if (session.getAttribute("cate") == null) {
@@ -53,7 +53,7 @@ public class UserJoinTaskController extends HttpServlet {
 					} else {
 						resp.sendRedirect("/index");
 					}
-				}				
+				}
 			} else {
 				HttpSession session = req.getSession();
 
@@ -93,6 +93,6 @@ public class UserJoinTaskController extends HttpServlet {
 					resp.sendRedirect("/index?error");
 				}
 			}
-		}		
+		}
 	}
 }
