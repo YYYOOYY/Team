@@ -19,6 +19,8 @@
 			<ul>
 				<c:choose>
 					<c:when test="${sessionScope.logon }">
+						<li>${sessionScope.logonUser.getNick() }</li>
+						<li>|</li>
 						<li class="login_ad"><a href="/logout">·Î±×¾Æ¿ô</a></li>
 					</c:when>
 					<c:otherwise>

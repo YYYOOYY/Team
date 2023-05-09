@@ -31,7 +31,7 @@ public class NoticeDetailController extends HttpServlet{
 		}
 		
 		if(userId == null || !userId.equals("master")) {			
-			if(notice.getSecret().equals("public")) {
+			if(notice.getSecret().equals("public") || notice.getSecret().equals("open")) {
 				NoticeDAO.updateViewCount(code);
 				req.setAttribute("code", code);
 				req.setAttribute("notice", notice);

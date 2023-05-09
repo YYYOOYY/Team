@@ -23,6 +23,10 @@ public class UserLogoutController extends HttpServlet {
 			resp.sendRedirect("/search");
 		} else if (r == 2) {
 			resp.sendRedirect("/board/market");
+		} else if (r == 3) {
+			resp.sendRedirect("/board/market");
+		} else if (r == 4) {
+			resp.sendRedirect("/notice/noticeBoard");
 		} else {
 			resp.sendRedirect("/index");
 		}
