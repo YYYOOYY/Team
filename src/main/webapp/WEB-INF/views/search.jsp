@@ -191,7 +191,7 @@
 										height="100px" />
 								</c:when>
 								<c:otherwise>
-									<img src="${c.firstImageUrl }" width="100px" height="100px" />
+									<img src="${c.firstImageUrl }" width="100px" height="100px" onerror="this.src='/resource/img/logo_01.png'"/>
 								</c:otherwise>
 							</c:choose>
 						</div>

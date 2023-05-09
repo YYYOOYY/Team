@@ -50,7 +50,7 @@ public class BoardCreateTaskController extends HttpServlet {
 		String body = multi.getParameter("body");
 		String area = multi.getParameter("search_02");
 
-		if (price.matches("[1-9][0-9]{1,6}00") && !title.equals("") && body.equals("")) {
+		if (price.matches("[1-9][0-9]{1,6}00") && !title.equals("") && !body.equals("")) {
 
 			if (area.equals("")) {
 				resp.sendRedirect("/board/create");

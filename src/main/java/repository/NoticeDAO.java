@@ -54,10 +54,11 @@ public class NoticeDAO extends DAO{
 		return notice;
 	}
 	
-	public static int modifyNotice(String body, String code, String secret) {
+	public static int modifyNotice(String title, String body, String code, String secret) {
 		SqlSession session = factory.openSession(true);
 		
 		Map<String, Object> obj = new HashMap<>();
+		obj.put("title", title);
 		obj.put("body", body);
 		obj.put("code", code);
 		obj.put("secret", secret);

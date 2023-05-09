@@ -16,7 +16,7 @@
 		SELECT * FROM NOTICE WHERE CODE = #{code}
 	</select>
 	<update id="modifyNotice" parameterType="hashmap">
-		UPDATE NOTICE SET BODY = #{body} AND SECRET = #{secret} WHERE CODE = #{code}
+		UPDATE NOTICE SET TITLE = #{title}, BODY = #{body}, SECRET = #{secret} WHERE CODE = #{code}
 	</update>
 	<update id="updateViewCount" parameterType="string">
 		UPDATE NOTICE SET VIEW_COUNT = VIEW_COUNT + 1 WHERE CODE = #{code} 

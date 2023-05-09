@@ -14,7 +14,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import data.board.Board;
-import util.GoCampingAPI;
+import data.notice.Notice;
 
 /*
  * 중고거래 게시판 불러오는 컨트롤러
@@ -31,8 +31,19 @@ public class BoardController extends HttpServlet{
 				(SqlSessionFactory)req.getServletContext().getAttribute("sqlSessionFactory");
 		SqlSession sqlSession = factory.openSession(true);
 		
-		List<Board> boardsAll = sqlSession.selectList("boards.findByBoardsAll");
+		String search = req.getParameter("search");
 		
+		List<Board> boardsAll = null;
+		
+		
+		
+		sqlSession.selectList("boards.findByBoardsAll");
+		
+		// 공지사항 -----
+		Notice notice = sqlSession.selectOne("notice.findByNotice", "81");
+		
+		req.setAttribute("notice", notice);
+		// -----------
 		
 		int p;
 		if (req.getParameter("pageNo") == null) {

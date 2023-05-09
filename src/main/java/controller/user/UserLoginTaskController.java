@@ -48,6 +48,8 @@ public class UserLoginTaskController extends HttpServlet {
 					resp.sendRedirect("/board/market");
 				} else if (r == 3) {
 					resp.sendRedirect("/board/detail?code=" + code);
+				} else if (r == 4) {
+					resp.sendRedirect("/notice/noticeBoard");
 				} else {
 					resp.sendRedirect("/index");
 				}

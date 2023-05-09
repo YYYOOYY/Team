@@ -25,6 +25,7 @@
 <body>
 	<%@ include file="/common/top.jsp"%>
 	<h3>캠핑용품을 캠핑어때에서 만나보세요</h3>
+	<div onclick="location.href='/notice/noticeDetail?code=81'">${notice.title }</div>
 	<div style="text-align: right;">
 		<div id="fail"></div>
 		<c:choose>
@@ -117,7 +118,7 @@
 					</c:url>
 					<c:choose>
 						<c:when test="${p eq currentPage }">
-							<b style="color: orange;">${p }</b>
+							<b style="color: white;">${p }</b>
 						</c:when>
 						<c:otherwise>
 							<a href="${target }" style="color: black;">${p }</a>
@@ -142,6 +143,7 @@
 				</c:if>
 				<%----------%>
 				<!-- 페이징처리 끝 -->
+			</div>
 		<script
 			src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="/resource/js/custom.js"></script>
