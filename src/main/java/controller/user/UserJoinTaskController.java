@@ -35,13 +35,14 @@ public class UserJoinTaskController extends HttpServlet {
 			params.put("id", id);
 			params.put("pass", hashpw);
 			params.put("nick", nick);
-			sqlSession.selectList("users.create", params);
-			
-			req.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(req, resp);
+			int r = sqlSession.insert("users.create", params);
+			if(r == 1) {
+				resp.sendRedirect("/index");				
+			} else {
+				
+			}
 		} else {
-			req.getRequestDispatcher("/WEB-INF/views/user/join.jsp").forward(req, resp);
-		}
-		
-		
+			
+		}		
 	}
 }

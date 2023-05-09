@@ -36,7 +36,7 @@
 				<form action="/board/search">
 					<div style="float: center;">
 						<input type="text" placeholder="검색" name="search"
-							style="height: 30px; width: 30%;" />
+							style="height: 40px; width: 30%;" />
 						<button type="submit">검색하기</button>
 					</div>
 				</form>

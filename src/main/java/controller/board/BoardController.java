@@ -33,11 +33,7 @@ public class BoardController extends HttpServlet{
 		
 		String search = req.getParameter("search");
 		
-		List<Board> boardsAll = null;
-		
-		
-		
-		sqlSession.selectList("boards.findByBoardsAll");
+		List<Board> boardsAll = sqlSession.selectList("boards.findByBoardsAll");
 		
 		// 공지사항 -----
 		Notice notice = sqlSession.selectOne("notice.findByNotice", "81");
