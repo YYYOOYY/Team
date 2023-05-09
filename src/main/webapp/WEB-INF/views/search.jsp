@@ -191,7 +191,7 @@
 										height="100px" />
 								</c:when>
 								<c:otherwise>
-									<img src="${c.firstImageUrl }" width="100px" height="100px" onerror="this.src='/resource/img/logo_01.png'"/>
+									<img src="${c.firstImageUrl }" width="100px" height="100px" />
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -206,10 +206,10 @@
 							<div class="txt_box">
 								<c:forEach items="${c.sbrsClItems }" var="s">
 									<div class="iz">
-										<div>
-											<img src="${s.resource }"  style="width: 100%;height: 100%"/>
+										<div class="iz26">
+											<img src="${s.resource }"/>
 										</div>
-										<div>${s.name }</div>
+										<div class="fz13">${s.name }</div>
 									</div>
 
 								</c:forEach>

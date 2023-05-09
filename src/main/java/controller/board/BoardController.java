@@ -1,7 +1,9 @@
 package controller.board;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,35 +23,40 @@ import data.notice.Notice;
  * 
  */
 @WebServlet("/board/market")
-public class BoardController extends HttpServlet{
+public class BoardController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		session.setAttribute("cate", 2);
-		
-		SqlSessionFactory factory =
-				(SqlSessionFactory)req.getServletContext().getAttribute("sqlSessionFactory");
+
+		SqlSessionFactory factory = (SqlSessionFactory) req.getServletContext().getAttribute("sqlSessionFactory");
 		SqlSession sqlSession = factory.openSession(true);
-		
+
 		String search = req.getParameter("search");
-		
-		List<Board> boardsAll = sqlSession.selectList("boards.findByBoardsAll");
-		
+
+		List<Board> boardsAll = null;
+
+		if (search == null || search.equals("")) {
+			boardsAll = sqlSession.selectList("boards.findByBoardsAll");
+		} else {
+			boardsAll = sqlSession.selectList("boards.search", search);
+		}
+
 		// 공지사항 -----
 		Notice notice = sqlSession.selectOne("notice.findByNotice", "81");
-		
+
 		req.setAttribute("notice", notice);
 		// -----------
-		
+
 		int p;
 		if (req.getParameter("pageNo") == null) {
 			p = 1;
 		} else {
 			p = Integer.parseInt(req.getParameter("pageNo"));
 		}
-		
+
 		int total = boardsAll.size();
-		int lastPage = total / 12 + (total % 12 > 0 ? 1 : 0);
+		int lastPage = total / 10 + (total % 10 > 0 ? 1 : 0);
 
 		int start = p % 10 == 0 ? p - 9 : p - (p % 10) + 1;
 		int last = p % 10 == 0 ? p : p - (p % 10) + 10;
@@ -65,15 +72,15 @@ public class BoardController extends HttpServlet{
 
 		req.setAttribute("existPrev", existPrev);
 		req.setAttribute("existNext", existNext);
-		
+
 		// 중고거래 게시글 불러오기
 		String pageNo = req.getParameter("pageNo");
-		
+
 		int page = pageNo == null ? 1 : Integer.parseInt(pageNo);
-		
-		int from = (page - 1) * 12;
-		int to = page == (boardsAll.size() / 12 + 1) ? from + (boardsAll.size() % 12) : page * 12;
-		
+
+		int from = (page - 1) * 10;
+		int to = page == (boardsAll.size() / 10 + 1) ? from + (boardsAll.size() % 10) : page * 10;
+
 		req.setAttribute("boardsAll", boardsAll.subList(from, to));
 		sqlSession.close();
 		req.getRequestDispatcher("/WEB-INF/views/board/market.jsp").forward(req, resp);

@@ -15,6 +15,7 @@ public class NoticeModifyTaskController extends HttpServlet{
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		String code = req.getParameter("code");
 		String title = req.getParameter("title");
 		String body = req.getParameter("body");
@@ -23,6 +24,7 @@ public class NoticeModifyTaskController extends HttpServlet{
 			resp.sendRedirect("/notice/noticeModify");
 			return;
 		}
+		
 		
 		int r = NoticeDAO.modifyNotice(title, body, code, secret);
 		if(r == 1) {

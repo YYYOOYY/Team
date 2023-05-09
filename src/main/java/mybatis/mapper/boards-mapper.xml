@@ -37,13 +37,13 @@
 		DELETE FROM INTERESTED WHERE USER_ID= #{userId} AND BOARD_CODE= #{boardCode}
 	</delete>
 	<update id="modify" parameterType="hashmap">
-		UPDATE BOARDS SET TITLE= #{title}, BODY= #{body}, PRICE= #{price}, IMG= #{img} WHERE CODE= #{code}
+		UPDATE BOARDS SET TITLE= #{title}, BODY= #{body}, PRICE= #{price} WHERE CODE= #{code}
 	</update>
 	<delete id="delete">
 		DELETE FROM BOARDS WHERE CODE= #{code}
 	</delete>
-	<select id="searchs">
-		SELECT * FROM BOARDS WHERE TITLE LIKE= '%'||#{search}||'%'
+	<select id="search" parameterType="string" resultType="data.board.Board">
+		SELECT * FROM BOARDS WHERE TITLE LIKE '%'||#{search}||'%' OR BODY LIKE '%'||#{search}||'%'
 	</select>
 	<update id="transactionOn" parameterType="string">
 		UPDATE BOARDS SET STATUS = '2' WHERE CODE = #{code}

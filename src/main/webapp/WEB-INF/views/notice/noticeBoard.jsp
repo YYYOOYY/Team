@@ -19,11 +19,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
 	rel="stylesheet">
-<style>
-	*{
-		padding: 5px;
-	}
-</style>
+
 </head>
 <body>
 	<%@ include file="/common/top.jsp"%>
@@ -42,7 +38,7 @@
 					test="${sessionScope.logonUser.getId() eq 'master' }">
 					[${notice.secret }]
 				</c:if></span>
-				 <span style="font-size: 25px; cursor: pointer; padding-left: 20px;">${notice.title }</span>
+				 <span style="font-size: 25px; cursor: pointer; padding-left: 50px; padding-top: 10px;">${notice.title }</span>
 			<div style="text-align: right; font-size: 12px; padding-right: 20px;">작성자 :
 				${notice.writer }</div>
 			<div style="text-align: right; padding-right: 20px;">👀 ${notice.viewCount }</div>

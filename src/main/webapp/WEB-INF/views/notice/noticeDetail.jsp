@@ -23,31 +23,27 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
 	rel="stylesheet">
-<style>
-* {
-	padding: 5px;
-}
-</style>
+
 </head>
 <body>
 	<%@ include file="/common/top.jsp"%>
 	<c:if test="${sessionScope.logonUser.getId() eq 'master' }">
 		<a href="/notice/noticeDelete?code=${notice.code }"
-			style="text-decoration: none; color: black; font-size: 15px; background-color: white; float: right;"> [삭제] </a>
+			style="text-decoration: none; color: black; font-size: 15px; padding: 10px; background-color: white; float: right;"> [삭제] </a>
 		<a href="/notice/noticeModify?code=${notice.code }"
-			style="text-decoration: none; color: black; font-size: 15px; background-color: white; float: right;"> [수정] </a>
+			style="text-decoration: none; color: black; font-size: 15px; padding: 10px; background-color: white; float: right;"> [수정] </a>
 	</c:if>
-	<h2 style="text-align: center; color: white; font-size: 30px;">캠핑소식</h2>
+	<h2 style="text-align: center; color: white; font-size: 30px; padding: 10px; ">캠핑소식</h2>
 	<div
-		style="border: 1px solid black; width: 80%; margin: auto; background-color: white;">
-		<div style="font-size: 25px; text-align: center;">${notice.title }</div>
-		<div style="text-align: right; font-size: 12px;">작성자 :
+		style="border: 1px solid black; width: 80%; margin: auto; background-color: white; padding: 10px; ">
+		<div style="font-size: 25px; text-align: center; padding: 10px; ">${notice.title }</div>
+		<div style="text-align: right; font-size: 12px; padding: 10px; border-bottom: 1px solid gray;">작성자 :
 			${notice.writer }</div>
-		<div style="text-align: left;">${notice.body }</div>
-		<div style="text-align: right;">
+		<div style="text-align: left; padding: 10px; border-bottom: 1px solid gray">${notice.body }</div>
+		<div style="text-align: right; padding: 10px;">
 			<fmt:formatDate value="${notice.writed }" pattern="yyyy.MM.dd" />
 		</div>
-		<div style="text-align: right;">👀 ${notice.viewCount }</div>
+		<div style="text-align: right; padding: 10px; ">👀 ${notice.viewCount }</div>
 	</div>
 
 	<script
