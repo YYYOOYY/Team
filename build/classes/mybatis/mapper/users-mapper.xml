@@ -3,10 +3,16 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="users">
-	<select id="findById" resultType="data.user.User" parameterType="java.lang.String">
-		SELECT * FROM USERS WHERE ID= #{ID}
+	<select id="findById" resultType="data.user.User" parameterType="string">
+		SELECT * FROM USERS WHERE ID= #{id}
 	</select>
 	<insert id="create" parameterType="java.util.HashMap">
 		INSERT INTO USERS(ID, PASS, NICK) VALUES(#{id}, #{pass}, #{nick})
 	</insert>
+	<select id="findByUser" parameterType="hashmap" resultType="data.user.User">
+		SELECT * FROM USERS WHERE ID = #{id} AND NICK = #{nick}
+	</select>
+	<select id="findByNick" resultType="data.user.User" parameterType="string">
+		SELECT * FROM USERS WHERE NICK = #{nick}
+	</select>
 </mapper>
