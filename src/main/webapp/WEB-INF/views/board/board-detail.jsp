@@ -228,7 +228,7 @@
 				<c:param name="code" value="${detail.code }" />
 				<c:param name="pageNo" value="1" />
 			</c:url>
-			<a href="${target}" style="color: black;">&lt;&lt;</a>
+			<a href="${target}" style="color: white;">&lt;&lt;</a>
 		</c:if>
 		<%----------%>
 		<%--이전버튼--%>
@@ -237,7 +237,7 @@
 				<c:param name="code" value="${detail.code }" />
 				<c:param name="pageNo" value="${start-1 }" />
 			</c:url>
-			<a href="${target}" style="color: black;">&lt;</a>
+			<a href="${target}" style="color: white;">&lt;</a>
 		</c:if>
 		<%----------%>
 		<%--현재 누른 페이지--%>
@@ -262,7 +262,7 @@
 				<c:param name="code" value="${detail.code }" />
 				<c:param name="pageNo" value="${last + 1 }" />
 			</c:url>
-			<a href="${target }" style="color: black;">&gt;</a>
+			<a href="${target }" style="color: white;">&gt;</a>
 		</c:if>
 		<%----------%>
 		<%--마지막으로--%>
@@ -271,7 +271,7 @@
 				<c:param name="code" value="${detail.code }" />
 				<c:param name="pageNo" value="${lastPage }" />
 			</c:url>
-			<a href="${target}" style="color: black;">&gt;&gt;</a>
+			<a href="${target}" style="color: white;">&gt;&gt;</a>
 		</c:if>
 		<%----------%>
 		<!-- 페이징처리 끝 -->
