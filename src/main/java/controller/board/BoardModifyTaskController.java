@@ -1,19 +1,25 @@
 package controller.board;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.oreilly.servlet.MultipartRequest;
+
 import data.board.Board;
+import data.user.User;
 
 /*
  * 중고거래 게시글 수정
@@ -30,8 +36,23 @@ public class BoardModifyTaskController extends HttpServlet{
 				(SqlSessionFactory)req.getServletContext().getAttribute("sqlSessionFactory");
 		SqlSession sqlSession = factory.openSession(true);
 		
-		String code = req.getParameter("code");
+		HttpSession session = req.getSession();
+		User found = (User) session.getAttribute("logonUser"); // 작성자
+		String writer = found.getNick();
 		
+		ServletContext application = req.getServletContext();
+		String path = application.getRealPath("/resource/img/" + "writer"); // 웹 uri 를 작성
+		File pathFile = new File(path);
+		if (!pathFile.exists()) { // 파일이 있는지 없는지 확인하는
+			pathFile.mkdirs();
+		}
+		
+		MultipartRequest multi = new MultipartRequest(req, path, 1024 * 1024 * 20, "UTF-8"); // 3번째에 들어간 숫자는 파일의 최대 크기를
+		String code = multi.getParameter("code");
+		String title = multi.getParameter("title");
+		String body = multi.getParameter("body");
+		String price = multi.getParameter("price");
+
 		req.setAttribute("code", code);
 		boolean user = (boolean)req.getSession().getAttribute("logon");
 		int r = sqlSession.update("boards.updateViewCount", code);
@@ -41,12 +62,12 @@ public class BoardModifyTaskController extends HttpServlet{
 			req.setAttribute("code", code);
 		}	
 		Map<String, Object> params = new HashMap<>();
-		// 회원일 때 글 작성
 		if(user) {
-			String title = req.getParameter("title");
-			String body = req.getParameter("body");
-			String price = req.getParameter("price");
+			String genCode = Long.toString(System.currentTimeMillis());
+			String img = "/resource/img/" + writer + "/" + genCode;
+			multi.getFile("img").renameTo(new File(path, genCode));
 			
+			params.put("img", img);
 			params.put("title", title);
 			params.put("body", body);
 			params.put("price", price);

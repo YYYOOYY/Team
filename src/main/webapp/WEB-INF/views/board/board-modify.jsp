@@ -37,8 +37,9 @@
 </head>
 <body>
 	<h3>게시글을 수정하세요.</h3>
-	<form action="/board/modify-task" method="post">
-		<input type="hidden" name="code" value="${code }">
+	<form action="/board/modify-task" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="code" value="${code }"/>
+		<input type="file" name="img" accept="image/*" />
 		<div>
 			제목 : <input type="text" name="title" value="${title }" />
 		</div>

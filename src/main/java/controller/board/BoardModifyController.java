@@ -26,11 +26,12 @@ public class BoardModifyController extends HttpServlet {
 		String body = req.getParameter("body");
 		String price = req.getParameter("price");
 		
+		req.setAttribute("writer", writer);
 		req.setAttribute("title", title);
 		req.setAttribute("body", body);
 		req.setAttribute("price", price);
 		
-		if(user.getNick().equals(writer) ) {
+		if(user.getNick().equals(writer)) {
 			req.setAttribute("code", code);
 			req.getRequestDispatcher("/WEB-INF/views/board/board-modify.jsp").forward(req, resp);			
 		} else {

@@ -22,8 +22,8 @@
 <body>
 	<%@ include file="/common/top.jsp"%>
 	<form action="/notice/noticeModify-task">
-		<input type="hidden" name="code" value="${code }"> <select
-			name="secret">
+		<input type="hidden" name="code" value="${code }">
+		 <select name="secret">
 			<option value="public"
 				${notice.secret eq 'public' ? 'selected' : '' }>공개</option>
 			<option value="private"
